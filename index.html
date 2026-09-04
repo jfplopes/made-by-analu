@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Made By AnaLu | Mesas Dulces y Decoración Artesanal</title>
+  <meta name="description" content="Mesas dulces artesanales para cumpleaños, bodas, baby showers y eventos especiales. Hechas con cariño y personalización única en Madrid.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-cream: #FDF8F3;
+      --color-rose-dust: #E8D5D0;
+      --color-rose-deep: #B08D86;
+      --color-gold: #C9A962;
+      --color-forest: #5A6B5C;
+      --color-charcoal: #2D2926;
+      --color-white: #FFFFFF;
+      
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 16px;
+      
+      --transition-slow: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      --transition-fast: 0.25s ease;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-charcoal);
+      background: var(--color-cream);
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Language Switcher */
+    .lang-switch {
+      position: fixed;
+      top: var(--space-md);
+      right: var(--space-md);
+      z-index: 100;
+      display: flex;
+      gap: var(--space-xs);
+      background: var(--color-white);
+      padding: 6px;
+      border-radius: var(--radius-md);
+      box-shadow: 0 2px 12px rgba(45, 41, 38, 0.08);
+    }
+    
+    .lang-switch button {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-charcoal);
+      background: transparent;
+      border: none;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .lang-switch button:hover {
+      background: var(--color-rose-dust);
+    }
+    
+    .lang-switch button.active {
+      background: var(--color-charcoal);
+      color: var(--color-white);
+    }
+    
+    /* Header */
+    header {
+      position: relative;
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      background: linear-gradient(180deg, var(--color-rose-dust) 0%, var(--color-cream) 100%);
+      overflow: hidden;
+    }
+    
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(90, 107, 92, 0.1) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    
+    .logo {
+      display: inline-block;
+      margin-bottom: var(--space-md);
+    }
+    
+    .logo img {
+      width: 120px;
+      height: auto;
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 20px rgba(45, 41, 38, 0.1);
+    }
+    
+    header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-xs);
+      letter-spacing: -0.02em;
+    }
+    
+    header p {
+      font-size: 1rem;
+      color: var(--color-rose-deep);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--color-cream);
+      border-bottom: 1px solid var(--color-rose-dust);
+      padding: var(--space-sm) var(--space-md);
+    }
+    
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    
+    nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: var(--space-xs) 0;
+      position: relative;
+      transition: var(--transition-fast);
+    }
+    
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--color-gold);
+      transition: var(--transition-fast);
+    }
+    
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
+    
+    /* Hero */
+    .hero {
+      padding: var(--space-2xl) var(--space-md);
+      text-align: center;
+      background: var(--color-cream);
+    }
+    
+    .hero h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--color-charcoal);
+      max-width: 600px;
+      margin: 0 auto var(--space-lg);
+      line-height: 1.4;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-white);
+      background: var(--color-charcoal);
+      border: none;
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    
+    .cta-button:hover {
+      background: var(--color-forest);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 41, 38, 0.15);
+    }
+    
+    /* Gallery */
+    .gallery {
+      padding: var(--space-xl) var(--space-md);
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .gallery h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      text-align: center;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-md);
+    }
+    
+    .gallery-item {
+      position: relative;
+      aspect-ratio: 3/4;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-rose-dust);
+      cursor: pointer;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(45, 41, 38, 0.4) 100%);
+      opacity: 0;
+      transition: var(--transition-fast);
+    }
+    
+    .gallery-item:hover::after {
+      opacity: 1;
+    }
+    
+    /* Services Section */
+    .services {
+      padding: var(--space-xl) var(--space-md);
+      background: var(--color-white);
+    }
+    
+    .services-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    .services h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 500;
+      text-align: center;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-lg);
+    }
+    
+    .service-card {
+      text-align: center;
+      padding: var(--space-md);
+    }
+    
+    .service-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .service-card p {
+      font-size: 0.875rem;
+      color: var(--color-rose-deep);
+      line-height: 1.5;
+    }
+    
+    /* Contact Section */
+    .contact {
+      padding: var(--space-2xl) var(--space-md);
+      background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-rose-dust) 100%);
+      text-align: center;
+    }
+    
+    .contact h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-md);
+    }
+    
+    .contact p {
+      font-size: 1rem;
+      color: var(--color-rose-deep);
+      max-width: 500px;
+      margin: 0 auto var(--space-lg);
+    }
+    
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+    
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      background: var(--color-white);
+      border: 1px solid var(--color-rose-dust);
+      padding: var(--space-sm) var(--space-md);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    
+    .contact-button:hover {
+      background: var(--color-charcoal);
+      color: var(--color-white);
+      border-color: var(--color-charcoal);
+      transform: translateY(-2px);
+    }
+    
+    .contact-button svg {
+      width: 18px;
+      height: 18px;
+    }
+    
+    /* Footer */
+    footer {
+      padding: var(--space-lg) var(--space-md);
+      text-align: center;
+      background: var(--color-charcoal);
+      color: var(--color-rose-dust);
+    }
+    
+    footer p {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .gallery-item {
+      animation: fadeInUp 0.6s ease backwards;
+    }
+    
+    .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.15s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.25s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.35s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(8) { animation-delay: 0.45s; }
+    .gallery-item:nth-child(9) { animation-delay: 0.5s; }
+    
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      :root {
+        --space-xl: 3rem;
+        --space-2xl: 4rem;
+      }
+      
+      .lang-switch {
+        top: var(--space-sm);
+        right: var(--space-sm);
+      }
+      
+      nav ul {
+        gap: var(--space-md);
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: var(--space-sm);
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+      
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Language Switcher -->
+  <div class="lang-switch">
+    <button class="active" data-lang="es">ES</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="pt">PT</button>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="assets/logo.jpg" alt="Made By AnaLu" width="120" height="auto">
+    </div>
+    <h1 data-i18n="header_title">Made By AnaLu</h1>
+    <p data-i18n="header_subtitle">Mesas dulces y decoración artesanal para tus eventos especiales</p>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <ul>
+      <li><a href="#galeria" data-i18n="nav_gallery">Galería</a></li>
+      <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
+      <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h2 data-i18n="hero_text">Cada mesa es única, feita com carinho e personalizada para ti</h2>
+    <a href="#contacto" class="cta-button" data-i18n="cta">Pedir Información</a>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" id="galeria">
+    <h3 data-i18n="gallery_title">Nuestro Trabajo</h3>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.05.jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06.jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (1).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (3).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (4).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (6).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Mesa dulce" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="servicios">
+    <div class="services-inner">
+      <h3 data-i18n="services_title">Lo que hacemos</h3>
+      <div class="services-grid">
+        <div class="service-card">
+          <h4 data-i18n="service_1_title">Cumpleaños</h4>
+          <p data-i18n="service_1_text">Mesas personalizadas para celebrar cada año especial con cariño</p>
+        </div>
+        <div class="service-card">
+          <h4 data-i18n="service_2_title">Baby Showers</h4>
+          <p data-i18n="service_2_text">Decoración suave y entrañable para recibir al nuevo miembro</p>
+        </div>
+        <div class="service-card">
+          <h4 data-i18n="service_3_title">Bodas</h4>
+          <p data-i18n="service_3_text">Mesas dulces que hacen de tu gran día algo inolvidable</p>
+        </div>
+        <div class="service-card">
+          <h4 data-i18n="service_4_title">Eventos Especiales</h4>
+          <p data-i18n="service_4_text">Decoración única para cualquier ocasión que quieras celebrar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contacto">
+    <h3 data-i18n="contact_title">¿Hablamos?</h3>
+    <p data-i18n="contact_text">Cuéntanos tu idea y hagámosla realidad. Estamos en Madrid y atendemos toda la zona.</p>
+    <div class="contact-links">
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="contact-button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        Instagram
+      </a>
+      <a href="https://wa.me/34" target="_blank" rel="noopener" class="contact-button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+        </svg>
+        WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Made By AnaLu · Madrid · <span data-i18n="footer">Hecho con cariño</span></p>
+  </footer>
+
+  <script>
+    // i18n translations
+    const translations = {
+      es: {
+        header_title: "Made By AnaLu",
+        header_subtitle: "Mesas dulces y decoración artesanal para tus eventos especiales",
+        nav_gallery: "Galería",
+        nav_services: "Servicios",
+        nav_contact: "Contacto",
+        hero_text: "Cada mesa es única, feita com carinho e personalizada para ti",
+        cta: "Pedir Información",
+        gallery_title: "Nuestro Trabajo",
+        services_title: "Lo que hacemos",
+        service_1_title: "Cumpleaños",
+        service_1_text: "Mesas personalizadas para celebrar cada año especial con cariño",
+        service_2_title: "Baby Showers",
+        service_2_text: "Decoración suave y entrañable para recibir al nuevo miembro",
+        service_3_title: "Bodas",
+        service_3_text: "Mesas dulces que hacen de tu gran día algo inolvidable",
+        service_4_title: "Eventos Especiales",
+        service_4_text: "Decoración única para cualquier ocasión que quieras celebrar",
+        contact_title: "¿Hablamos?",
+        contact_text: "Cuéntanos tu idea y hagámosla realidad. Estamos en Madrid y atendemos toda la zona.",
+        footer: "Hecho con cariño"
+      },
+      en: {
+        header_title: "Made By AnaLu",
+        header_subtitle: "Handcrafted sweet tables and decoration for your special events",
+        nav_gallery: "Gallery",
+        nav_services: "Services",
+        nav_contact: "Contact",
+        hero_text: "Each table is unique, made with care and personalized for you",
+        cta: "Get in Touch",
+        gallery_title: "Our Work",
+        services_title: "What We Do",
+        service_1_title: "Birthdays",
+        service_1_text: "Customized tables to celebrate each special year with love",
+        service_2_title: "Baby Showers",
+        service_2_text: "Soft and charming decoration to welcome the new little one",
+        service_3_title: "Weddings",
+        service_3_text: "Sweet tables that make your big day unforgettable",
+        service_4_title: "Special Events",
+        service_4_text: "Unique decoration for any occasion you want to celebrate",
+        contact_title: "Let's Talk",
+        contact_text: "Tell us your idea and let's make it happen. We're in Madrid and serve the entire area.",
+        footer: "Made with care"
+      },
+      pt: {
+        header_title: "Made By AnaLu",
+        header_subtitle: "Mesas doces e decoração artesanal para seus eventos especiais",
+        nav_gallery: "Galeria",
+        nav_services: "Serviços",
+        nav_contact: "Contacto",
+        hero_text: "Cada mesa é única, feita com carinho e personalizada para ti",
+        cta: "Pedir Informação",
+        gallery_title: "Nosso Trabalho",
+        services_title: "O que fazemos",
+        service_1_title: "Aniversários",
+        service_1_text: "Mesas personalizadas para celebrar cada ano especial com carinho",
+        service_2_title: "Chás de Bebé",
+        service_2_text: "Decoração suave e encantadora para receber o novo membro",
+        service_3_title: "Casamentos",
+        service_3_text: "Mesas doces que tornam o seu grande dia inesquecível",
+        service_4_title: "Eventos Especiais",
+        service_4_text: "Decoração única para qualquer ocasião que queira celebrar",
+        contact_title: "Falamos?",
+        contact_text: "Conte-nos a sua ideia e vamos torná-la realidade. Estamos em Madrid e atendemos toda a região.",
+        footer: "Feito com carinho"
+      }
+    };
+
+    // Language switching
+    const langButtons = document.querySelectorAll('.lang-switch button');
+    const html = document.documentElement;
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        
+        // Update buttons
+        langButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update HTML lang
+        html.lang = lang;
+        
+        // Update all translatable elements
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.dataset.i18n;
+          if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+          }
+        });
+      });
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
