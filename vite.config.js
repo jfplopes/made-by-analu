@@ -9,8 +9,10 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    host: '0.0.0.0',
     open: true,
-    cors: true
+    cors: true,
+    allowedHosts: ['cloudserver', '.cloudserver', 'localhost', '127.0.0.1']
   },
   plugins: []
 })
