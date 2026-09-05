@@ -1,9 +1,6 @@
 {
-  "files": {
-    "index.html": {
-      "pattern": "**/*.html",
-      "inject": true
-    }
-  },
+  "files": ["index.html"],
+  "insertBefore": "</body>",
+  "commentSyntax": "html",
   "cspChecked": false
 }
