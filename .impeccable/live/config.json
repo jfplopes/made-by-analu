@@ -1,0 +1,9 @@
+{
+  "files": {
+    "index.html": {
+      "pattern": "**/*.html",
+      "inject": true
+    }
+  },
+  "cspChecked": false
+}
