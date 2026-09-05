@@ -284,6 +284,130 @@
       opacity: 1;
     }
     
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(45, 41, 38, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+    }
+    
+    .lightbox.active .lightbox-img {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    .lightbox-img.slide-left {
+      animation: slideLeft 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    .lightbox-img.slide-right {
+      animation: slideRight 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    .lightbox-img.slide-in {
+      animation: slideIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    
+    @keyframes slideLeft {
+      0% { transform: translateX(0) scale(1); opacity: 1; }
+      100% { transform: translateX(-60px) scale(0.95); opacity: 0; }
+    }
+    
+    @keyframes slideRight {
+      0% { transform: translateX(0) scale(1); opacity: 1; }
+      100% { transform: translateX(60px) scale(0.95); opacity: 0; }
+    }
+    
+    @keyframes slideIn {
+      0% { transform: translateX(0) scale(0.95); opacity: 0; }
+      100% { transform: translateX(0) scale(1); opacity: 1; }
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      color: var(--color-white);
+      font-size: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background var(--transition-fast);
+    }
+    
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--color-white);
+      font-size: 1.5rem;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition-fast);
+    }
+    
+    .lightbox-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    .lightbox-prev {
+      left: var(--space-md);
+    }
+    
+    .lightbox-next {
+      right: var(--space-md);
+    }
+    
+    .lightbox-counter {
+      position: absolute;
+      bottom: var(--space-md);
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--color-white);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+    
     /* Services Section */
     .services {
       padding: var(--space-xl) var(--space-md);
@@ -329,26 +453,194 @@
       line-height: 1.5;
     }
     
+    /* Blog Section */
+    .blog {
+      padding: var(--space-xl) var(--space-md);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .blog h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 500;
+      text-align: center;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-lg);
+    }
+    
+    .blog-card {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(45, 41, 38, 0.1);
+    }
+    
+    .blog-card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    
+    .blog-card-body {
+      padding: var(--space-md);
+    }
+    
+    .blog-card-date {
+      font-size: 0.75rem;
+      color: var(--color-rose-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .blog-card-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .blog-card-excerpt {
+      font-size: 0.875rem;
+      color: var(--color-rose-deep);
+      line-height: 1.5;
+    }
+    
     /* Contact Section */
     .contact {
       padding: var(--space-2xl) var(--space-md);
       background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-rose-dust) 100%);
-      text-align: center;
+    }
+    
+    .contact-inner {
+      max-width: 800px;
+      margin: 0 auto;
     }
     
     .contact h3 {
       font-family: var(--font-display);
       font-size: 2rem;
       font-weight: 500;
+      text-align: center;
       color: var(--color-charcoal);
       margin-bottom: var(--space-md);
     }
     
-    .contact p {
+    .contact > p,
+    .contact .contact-intro {
       font-size: 1rem;
       color: var(--color-rose-deep);
       max-width: 500px;
       margin: 0 auto var(--space-lg);
+      text-align: center;
+    }
+    
+    .contact-form {
+      background: var(--color-white);
+      padding: var(--space-lg);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 4px 20px rgba(45, 41, 38, 0.08);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+    
+    .form-group {
+      margin-bottom: var(--space-md);
+    }
+    
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: var(--space-sm);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: var(--color-charcoal);
+      background: var(--color-cream);
+      border: 1px solid var(--color-rose-dust);
+      border-radius: var(--radius-md);
+      transition: border-color var(--transition-fast);
+    }
+    
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--color-gold);
+    }
+    
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    
+    .form-submit {
+      width: 100%;
+      padding: var(--space-sm) var(--space-lg);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-white);
+      background: var(--color-charcoal);
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+    
+    .form-submit:hover {
+      background: var(--color-forest);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 41, 38, 0.15);
+    }
+    
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-lg);
+    }
+    
+    .form-success.show {
+      display: block;
+    }
+    
+    .form-success h4 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .form-success p {
+      color: var(--color-rose-deep);
     }
     
     .contact-links {
@@ -459,9 +751,18 @@
         gap: var(--space-md);
       }
       
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+      
       .contact-links {
         flex-direction: column;
         align-items: center;
+      }
+      
+      .lightbox-nav {
+        width: 40px;
+        height: 40px;
       }
     }
   </style>
@@ -488,13 +789,14 @@
     <ul>
       <li><a href="#galeria" data-i18n="nav_gallery">Galería</a></li>
       <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
+      <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
       <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
     </ul>
   </nav>
 
   <!-- Hero -->
   <section class="hero">
-    <h2 data-i18n="hero_text">Cada mesa es única, feita com carinho e personalizada para ti</h2>
+    <h2 data-i18n="hero_text">Cada mesa es única, hecha con cariño y personalizada para ti</h2>
     <a href="#contacto" class="cta-button" data-i18n="cta">Pedir Información</a>
   </section>
 
@@ -502,35 +804,44 @@
   <section class="gallery" id="galeria">
     <h3 data-i18n="gallery_title">Nuestro Trabajo</h3>
     <div class="gallery-grid">
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="0">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.05.jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="1">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06.jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="2">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (1).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="3">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="4">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (3).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="5">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (4).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="6">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="7">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (6).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item" data-index="8">
         <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Mesa dulce" loading="lazy">
       </div>
     </div>
   </section>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Anterior">&#8249;</button>
+    <img class="lightbox-img" src="" alt="Vista ampliada">
+    <button class="lightbox-nav lightbox-next" aria-label="Siguiente">&#8250;</button>
+    <div class="lightbox-counter"></div>
+  </div>
 
   <!-- Services -->
   <section class="services" id="servicios">
@@ -557,25 +868,94 @@
     </div>
   </section>
 
+  <!-- Blog -->
+  <section class="blog" id="blog">
+    <h3 data-i18n="blog_title">Blog</h3>
+    <div class="blog-grid">
+      <article class="blog-card">
+        <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Decoración de mesa dulce" loading="lazy">
+        <div class="blog-card-body">
+          <div class="blog-card-date">25 Agosto 2026</div>
+          <h4 class="blog-card-title" data-i18n="blog_1_title">Ideas para una mesa dulce de cumpleaños infantil</h4>
+          <p class="blog-card-excerpt" data-i18n="blog_1_excerpt">Descubre cómo crear una mesa dulces temática que sorprenda a los más pequeños con colores, texturas y detalles únicos.</p>
+        </div>
+      </article>
+      <article class="blog-card">
+        <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Decoración de mesa dulce" loading="lazy">
+        <div class="blog-card-body">
+          <div class="blog-card-date">18 Agosto 2026</div>
+          <h4 class="blog-card-title" data-i18n="blog_2_title">Tendencias en mesas dulces para bodas 2026</h4>
+          <p class="blog-card-excerpt" data-i18n="blog_2_excerpt">Los colores pastel, los detalles dorados y las texturas naturales dominan este año en celebraciones nupciales.</p>
+        </div>
+      </article>
+      <article class="blog-card">
+        <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Decoración de mesa dulce" loading="lazy">
+        <div class="blog-card-body">
+          <div class="blog-card-date">10 Agosto 2026</div>
+          <h4 class="blog-card-title" data-i18n="blog_3_title">Baby shower: cómo elegir la decoración perfecta</h4>
+          <p class="blog-card-excerpt" data-i18n="blog_3_excerpt">Guía práctica para planificar una decoración que refleje la personalidad de los futuros padres y cree un ambiente mágico.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <!-- Contact -->
   <section class="contact" id="contacto">
-    <h3 data-i18n="contact_title">¿Hablamos?</h3>
-    <p data-i18n="contact_text">Cuéntanos tu idea y hagámosla realidad. Estamos en Madrid y atendemos toda la zona.</p>
-    <div class="contact-links">
-      <a href="https://instagram.com" target="_blank" rel="noopener" class="contact-button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-        </svg>
-        Instagram
-      </a>
-      <a href="https://wa.me/34" target="_blank" rel="noopener" class="contact-button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-        </svg>
-        WhatsApp
-      </a>
+    <div class="contact-inner">
+      <h3 data-i18n="contact_title">¿Hablamos?</h3>
+      <p class="contact-intro" data-i18n="contact_text">Cuéntanos tu idea y hagámosla realidad. Estamos en Madrid y atendemos toda la zona.</p>
+      
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name" data-i18n="form_name">Nombre</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email" data-i18n="form_email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="event" data-i18n="form_event">Tipo de evento</label>
+          <select id="event" name="event" required>
+            <option value="" data-i18n="form_event_placeholder">Selecciona una opción</option>
+            <option value="cumpleanos" data-i18n="form_event_birthday">Cumpleaños</option>
+            <option value="baby-shower" data-i18n="form_event_baby">Baby Shower</option>
+            <option value="boda" data-i18n="form_event_wedding">Boda</option>
+            <option value="otro" data-i18n="form_event_other">Otro</option>
+            <option value="halloween" data-i18n="form_event_halloween">Halloween</option>
+            <option value="navidad" data-i18n="form_event_christmas">Navidad</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message" data-i18n="form_message">Cuéntanos tu idea</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="form-submit" data-i18n="form_submit">Enviar Mensaje</button>
+      </form>
+      
+      <div class="form-success" id="formSuccess">
+        <h4 data-i18n="form_success_title">¡Mensaje enviado!</h4>
+        <p data-i18n="form_success_text">Gracias por contactarnos. Te responderemos en menos de 24 horas.</p>
+      </div>
+      
+      <div class="contact-links">
+        <a href="https://instagram.com" target="_blank" rel="noopener" class="contact-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/34" target="_blank" rel="noopener" class="contact-button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 
@@ -592,8 +972,9 @@
         header_subtitle: "Mesas dulces y decoración artesanal para tus eventos especiales",
         nav_gallery: "Galería",
         nav_services: "Servicios",
+        nav_blog: "Blog",
         nav_contact: "Contacto",
-        hero_text: "Cada mesa es única, feita com carinho e personalizada para ti",
+        hero_text: "Cada mesa es única, hecha con cariño y personalizada para ti",
         cta: "Pedir Información",
         gallery_title: "Nuestro Trabajo",
         services_title: "Lo que hacemos",
@@ -605,8 +986,29 @@
         service_3_text: "Mesas dulces que hacen de tu gran día algo inolvidable",
         service_4_title: "Eventos Especiales",
         service_4_text: "Decoración única para cualquier ocasión que quieras celebrar",
+        blog_title: "Blog",
+        blog_1_title: "Ideas para una mesa dulce de cumpleaños infantil",
+        blog_1_excerpt: "Descubre cómo crear una mesa dulces temática que sorprenda a los más pequeños con colores, texturas y detalles únicos.",
+        blog_2_title: "Tendencias en mesas dulces para bodas 2026",
+        blog_2_excerpt: "Los colores pastel, los detalles dorados y las texturas naturales dominan este año en celebraciones nupciales.",
+        blog_3_title: "Baby shower: cómo elegir la decoración perfecta",
+        blog_3_excerpt: "Guía práctica para planificar una decoración que refleje la personalidad de los futuros padres y cree un ambiente mágico.",
         contact_title: "¿Hablamos?",
         contact_text: "Cuéntanos tu idea y hagámosla realidad. Estamos en Madrid y atendemos toda la zona.",
+        form_name: "Nombre",
+        form_email: "Email",
+        form_event: "Tipo de evento",
+        form_event_placeholder: "Selecciona una opción",
+        form_event_birthday: "Cumpleaños",
+        form_event_baby: "Baby Shower",
+        form_event_wedding: "Boda",
+        form_event_other: "Otro",
+        form_event_halloween: "Halloween",
+        form_event_christmas: "Navidad",
+        form_message: "Cuéntanos tu idea",
+        form_submit: "Enviar Mensaje",
+        form_success_title: "¡Mensaje enviado!",
+        form_success_text: "Gracias por contactarnos. Te responderemos en menos de 24 horas.",
         footer: "Hecho con cariño"
       },
       en: {
@@ -614,6 +1016,7 @@
         header_subtitle: "Handcrafted sweet tables and decoration for your special events",
         nav_gallery: "Gallery",
         nav_services: "Services",
+        nav_blog: "Blog",
         nav_contact: "Contact",
         hero_text: "Each table is unique, made with care and personalized for you",
         cta: "Get in Touch",
@@ -627,8 +1030,29 @@
         service_3_text: "Sweet tables that make your big day unforgettable",
         service_4_title: "Special Events",
         service_4_text: "Unique decoration for any occasion you want to celebrate",
+        blog_title: "Blog",
+        blog_1_title: "Ideas for a children's birthday sweet table",
+        blog_1_excerpt: "Discover how to create a themed sweet table that surprises the little ones with colors, textures and unique details.",
+        blog_2_title: "Sweet table trends for weddings 2026",
+        blog_2_excerpt: "Pastel colors, gold details and natural textures dominate this year in wedding celebrations.",
+        blog_3_title: "Baby shower: how to choose the perfect decoration",
+        blog_3_excerpt: "Practical guide to plan a decoration that reflects the parents-to-be personality and creates a magical atmosphere.",
         contact_title: "Let's Talk",
         contact_text: "Tell us your idea and let's make it happen. We're in Madrid and serve the entire area.",
+        form_name: "Name",
+        form_email: "Email",
+        form_event: "Event type",
+        form_event_placeholder: "Select an option",
+        form_event_birthday: "Birthday",
+        form_event_baby: "Baby Shower",
+        form_event_wedding: "Wedding",
+        form_event_other: "Other",
+        form_event_halloween: "Halloween",
+        form_event_christmas: "Christmas",
+        form_message: "Tell us your idea",
+        form_submit: "Send Message",
+        form_success_title: "Message sent!",
+        form_success_text: "Thank you for contacting us. We'll get back to you within 24 hours.",
         footer: "Made with care"
       },
       pt: {
@@ -636,6 +1060,7 @@
         header_subtitle: "Mesas doces e decoração artesanal para seus eventos especiais",
         nav_gallery: "Galeria",
         nav_services: "Serviços",
+        nav_blog: "Blog",
         nav_contact: "Contacto",
         hero_text: "Cada mesa é única, feita com carinho e personalizada para ti",
         cta: "Pedir Informação",
@@ -649,8 +1074,29 @@
         service_3_text: "Mesas doces que tornam o seu grande dia inesquecível",
         service_4_title: "Eventos Especiais",
         service_4_text: "Decoração única para qualquer ocasião que queira celebrar",
+        blog_title: "Blog",
+        blog_1_title: "Ideias para uma mesa doce de aniversário infantil",
+        blog_1_excerpt: "Descubra como criar uma mesa doce temática que surpreenda os pequenos com cores, texturas e detalhes únicos.",
+        blog_2_title: "Tendências em mesas doces para casamentos 2026",
+        blog_2_excerpt: "Cores pastel, detalhes dourados e texturas naturais dominam este ano em celebrações nupciais.",
+        blog_3_title: "Chá de bebê: como escolher a decoração perfeita",
+        blog_3_excerpt: "Guia prático para planejar uma decoração que reflicta a personalidade dos futuros pais e crie uma atmosfera mágica.",
         contact_title: "Falamos?",
         contact_text: "Conte-nos a sua ideia e vamos torná-la realidade. Estamos em Madrid e atendemos toda a região.",
+        form_name: "Nome",
+        form_email: "Email",
+        form_event: "Tipo de evento",
+        form_event_placeholder: "Selecione uma opção",
+        form_event_birthday: "Aniversário",
+        form_event_baby: "Chá de Bebê",
+        form_event_wedding: "Casamento",
+        form_event_other: "Outro",
+        form_event_halloween: "Halloween",
+        form_event_christmas: "Natal",
+        form_message: "Conte-nos sua ideia",
+        form_submit: "Enviar Mensagem",
+        form_success_title: "Mensagem enviada!",
+        form_success_text: "Obrigada por nos contactar. Responderemos em menos de 24 horas.",
         footer: "Feito com carinho"
       }
     };
@@ -690,9 +1136,81 @@
         }
       });
     });
+
+    // Gallery Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const img = galleryItems[index].querySelector('img');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCounter.textContent = `${index + 1} / ${galleryItems.length}`;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigateLightbox(direction) {
+      const slideClass = direction === 1 ? 'slide-left' : 'slide-right';
+      lightboxImg.classList.add(slideClass);
+      
+      setTimeout(() => {
+        currentIndex = (currentIndex + direction + galleryItems.length) % galleryItems.length;
+        const img = galleryItems[currentIndex].querySelector('img');
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightboxCounter.textContent = `${currentIndex + 1} / ${galleryItems.length}`;
+        
+        lightboxImg.classList.remove(slideClass);
+        lightboxImg.classList.add('slide-in');
+        
+        setTimeout(() => {
+          lightboxImg.classList.remove('slide-in');
+        }, 400);
+      }, 350);
+    }
+
+    galleryItems.forEach((item, index) => {
+      item.addEventListener('click', () => openLightbox(index));
+    });
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => navigateLightbox(-1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => navigateLightbox(1));
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // Contact Form
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // In production, this would send to a backend
+      contactForm.style.display = 'none';
+      formSuccess.classList.add('show');
+    });
   </script>
 <!-- impeccable-live-start -->
-<script src="http://localhost:8401/live.js?token=524f9cd4-ad54-4713-b77e-fc270d80766d"></script>
+<script src="http://localhost:8400/live.js?token=df29e634-697f-447b-8984-a433342a6dec"></script>
 <!-- impeccable-live-end -->
 </body>
 </html>
