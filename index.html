@@ -518,6 +518,124 @@
       color: var(--color-rose-deep);
       line-height: 1.5;
     }
+
+    /* Blog Modal */
+    .blog-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(45, 41, 38, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .blog-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .blog-modal-content {
+      background: var(--color-white);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
+      width: 90vw;
+      max-height: 85vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+      position: relative;
+    }
+
+    .blog-modal.active .blog-modal-content {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    .blog-modal-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    .blog-modal-body {
+      padding: var(--space-lg);
+    }
+
+    .blog-modal-date {
+      font-size: 0.75rem;
+      color: var(--color-rose-deep);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-xs);
+    }
+
+    .blog-modal-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-md);
+      line-height: 1.3;
+    }
+
+    .blog-modal-text {
+      font-size: 0.95rem;
+      color: var(--color-charcoal);
+      line-height: 1.7;
+      margin-bottom: var(--space-sm);
+    }
+
+    .blog-modal-text:last-child {
+      margin-bottom: 0;
+    }
+
+    .blog-modal-close {
+      position: absolute;
+      top: var(--space-md);
+      right: var(--space-md);
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      color: var(--color-charcoal);
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background var(--transition-fast);
+      z-index: 1;
+    }
+
+    .blog-modal-close:hover {
+      background: var(--color-white);
+    }
+
+    .blog-card-readmore {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--color-gold);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      margin-top: var(--space-xs);
+      transition: color var(--transition-fast);
+    }
+
+    .blog-card-readmore:hover {
+      color: var(--color-charcoal);
+    }
     
     /* Contact Section */
     .contact {
@@ -702,7 +820,65 @@
         transform: translateY(0);
       }
     }
-    
+
+    /* About Section */
+    .about {
+      padding: var(--space-xl) var(--space-md);
+      background: var(--color-white);
+    }
+
+    .about-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+
+    .about-portrait img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 12px 32px rgba(45, 41, 38, 0.15);
+    }
+
+    .about-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 500;
+      font-style: italic;
+      color: var(--color-charcoal);
+      margin-bottom: var(--space-md);
+      line-height: 1.3;
+    }
+
+    .about-text p {
+      color: var(--color-rose-deep);
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 768px) {
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-lg);
+      }
+  
+      .about-portrait {
+        max-width: 320px;
+        margin: 0 auto;
+      }
+    }
+
     .gallery-item {
       animation: fadeInUp 0.6s ease backwards;
     }
@@ -786,18 +962,36 @@
 
   <!-- Navigation -->
   <nav>
-    <ul>
-      <li><a href="#galeria" data-i18n="nav_gallery">Galería</a></li>
-      <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
-      <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
-      <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
-    </ul>
-  </nav>
+        <ul>
+          <li><a href="#sobre-mi" data-i18n="nav_about">Sobre Mí</a></li>
+          <li><a href="#galeria" data-i18n="nav_gallery">Galería</a></li>
+          <li><a href="#servicios" data-i18n="nav_services">Servicios</a></li>
+          <li><a href="#blog" data-i18n="nav_blog">Blog</a></li>
+          <li><a href="#contacto" data-i18n="nav_contact">Contacto</a></li>
+        </ul>
+      </nav>
 
   <!-- Hero -->
   <section class="hero">
     <h2 data-i18n="hero_text">Cada mesa es única, hecha con cariño y personalizada para ti</h2>
     <a href="#contacto" class="cta-button" data-i18n="cta">Pedir Información</a>
+  </section>
+
+  <!-- About AnaLu -->
+  <section class="about" id="sobre-mi">
+    <div class="about-inner">
+      <div class="about-content">
+        <div class="about-portrait">
+          <img src="assets/IMG_20210529_162616.jpg" alt="AnaLu, creadora de Made By AnaLu" loading="lazy">
+        </div>
+        <div class="about-text">
+          <h3 data-i18n="about_title">Hola, soy AnaLu</h3>
+          <p data-i18n="about_text_1">Me llamo Ana Lu y hago mesas dulces desde mi casa en Madrid. Lo que empezó como un hobby para los cumpleaños de mis amigas se fue convirtiendo en algo más: cada mesa que hago lleva un pedazo de mi tiempo, mi cuidado y mi ilusión.</p>
+          <p data-i18n="about_text_2">No trabajo con catálogos ni alquileres. Cada encargo es único: elijo los colores, las texturas y los detalles pensando en la persona que lo va a vivir y en el lugar donde se celebra. Para mí, una mesa dulce no es solo decoración — es la forma de decir 'te quiero' o 'enhorabuena' sin palabras.</p>
+          <p data-i18n="about_text_3">Si te gusta lo que ves y quieres que hagamos algo juntas, escríbeme por Instagram o WhatsApp. Me encantará escuchar tu idea.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- Gallery -->
@@ -843,11 +1037,23 @@
     <div class="lightbox-counter"></div>
   </div>
 
+  <div class="blog-modal" id="blogModal">
+    <div class="blog-modal-content">
+      <button class="blog-modal-close" aria-label="Cerrar">&times;</button>
+      <img class="blog-modal-img" src="" alt="">
+      <div class="blog-modal-body">
+        <div class="blog-modal-date"></div>
+        <h2 class="blog-modal-title"></h2>
+        <div class="blog-modal-text"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- Services -->
   <section class="services" id="servicios">
     <div class="services-inner">
-      <h3 data-i18n="services_title">Lo que hacemos</h3>
-      <div class="services-grid">
+      <h3 data-i18n="services_title">Lo que hago</h3>
+      <div class="services-dense">
         <div class="service-card">
           <h4 data-i18n="service_1_title">Cumpleaños</h4>
           <p data-i18n="service_1_text">Mesas personalizadas para celebrar cada año especial con cariño</p>
@@ -864,6 +1070,14 @@
           <h4 data-i18n="service_4_title">Eventos Especiales</h4>
           <p data-i18n="service_4_text">Decoración única para cualquier ocasión que quieras celebrar</p>
         </div>
+        <div class="service-card">
+          <h4 data-i18n="service_5_title">Halloween</h4>
+          <p data-i18n="service_5_text">Mesas temáticas con encanto misterioso para celebrar la noche más divertida</p>
+        </div>
+        <div class="service-card">
+          <h4 data-i18n="service_6_title">Navidad</h4>
+          <p data-i18n="service_6_text">Decoración navideña llena de calidez y espíritu festivo para tu celebración</p>
+        </div>
       </div>
     </div>
   </section>
@@ -872,28 +1086,31 @@
   <section class="blog" id="blog">
     <h3 data-i18n="blog_title">Blog</h3>
     <div class="blog-grid">
-      <article class="blog-card">
+      <article class="blog-card" data-blog="0">
         <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Decoración de mesa dulce" loading="lazy">
         <div class="blog-card-body">
           <div class="blog-card-date">25 Agosto 2026</div>
           <h4 class="blog-card-title" data-i18n="blog_1_title">Ideas para una mesa dulce de cumpleaños infantil</h4>
           <p class="blog-card-excerpt" data-i18n="blog_1_excerpt">Descubre cómo crear una mesa dulces temática que sorprenda a los más pequeños con colores, texturas y detalles únicos.</p>
+          <button class="blog-card-readmore" data-i18n="blog_readmore">Leer más</button>
         </div>
       </article>
-      <article class="blog-card">
+      <article class="blog-card" data-blog="1">
         <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Decoración de mesa dulce" loading="lazy">
         <div class="blog-card-body">
           <div class="blog-card-date">18 Agosto 2026</div>
           <h4 class="blog-card-title" data-i18n="blog_2_title">Tendencias en mesas dulces para bodas 2026</h4>
           <p class="blog-card-excerpt" data-i18n="blog_2_excerpt">Los colores pastel, los detalles dorados y las texturas naturales dominan este año en celebraciones nupciales.</p>
+          <button class="blog-card-readmore" data-i18n="blog_readmore">Leer más</button>
         </div>
       </article>
-      <article class="blog-card">
+      <article class="blog-card" data-blog="2">
         <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Decoración de mesa dulce" loading="lazy">
         <div class="blog-card-body">
           <div class="blog-card-date">10 Agosto 2026</div>
           <h4 class="blog-card-title" data-i18n="blog_3_title">Baby shower: cómo elegir la decoración perfecta</h4>
           <p class="blog-card-excerpt" data-i18n="blog_3_excerpt">Guía práctica para planificar una decoración que refleje la personalidad de los futuros padres y cree un ambiente mágico.</p>
+          <button class="blog-card-readmore" data-i18n="blog_readmore">Leer más</button>
         </div>
       </article>
     </div>
@@ -970,6 +1187,7 @@
       es: {
         header_title: "Made By AnaLu",
         header_subtitle: "Mesas dulces y decoración artesanal para tus eventos especiales",
+        nav_about: "Sobre Mí",
         nav_gallery: "Galería",
         nav_services: "Servicios",
         nav_blog: "Blog",
@@ -977,7 +1195,7 @@
         hero_text: "Cada mesa es única, hecha con cariño y personalizada para ti",
         cta: "Pedir Información",
         gallery_title: "Nuestro Trabajo",
-        services_title: "Lo que hacemos",
+        services_title: "Lo que hago",
         service_1_title: "Cumpleaños",
         service_1_text: "Mesas personalizadas para celebrar cada año especial con cariño",
         service_2_title: "Baby Showers",
@@ -993,6 +1211,16 @@
         blog_2_excerpt: "Los colores pastel, los detalles dorados y las texturas naturales dominan este año en celebraciones nupciales.",
         blog_3_title: "Baby shower: cómo elegir la decoración perfecta",
         blog_3_excerpt: "Guía práctica para planificar una decoración que refleje la personalidad de los futuros padres y cree un ambiente mágico.",
+        blog_readmore: "Leer más",
+        blog_1_full_1: "Elegir el tema correcto es el primer paso. Piensa en lo que le ilusiona al cumpleañero: sus personajes favoritos, un color que le encante, o una idea que combine con la decoración de la fiesta. Los temas más populares este año incluyen naturaleza, animales y mundos de fantasía.",
+        blog_1_full_2: "La clave está en los detalles pequeños: servilletas personalizadas, confeti temático, labels en los dulces con el nombre del niño. Todo suma para crear una atmósfera mágica sin necesidad de gastar una fortuna.",
+        blog_1_full_3: "Y recuerda: cada mesa es única. No busques copiar exactamente lo que ves en internet, sino adaptar las ideas al gusto del cumpleañero y al espacio donde celebrarás. Eso es lo que hace especial cada trabajo.",
+        blog_2_full_1: "Este 2026, las bodas apuestan por la naturalidad. Los tonos arena, verde salvia y rosa empolvado son los favoritos. Se alejan los blancos puros y los colores brillantes para dar paso a una paleta suave y elegante.",
+        blog_2_full_2: "Los materiales naturales ganan protagonismo: madera, lino, cerámica artesanal. Las mesas dulces se decoran con flores secas, ramas de olivo y velas de cera virgen. Todo transmite calidez y autenticidad.",
+        blog_2_full_3: "Otra tendencia fuerte es la personalización: cada boda tiene su propia historia, y la mesa dulce debe contarla. Desde monogramas en los pasteles hasta colores que reflejen la paleta elegida para la boda entera.",
+        blog_3_full_1: "El baby shower es una de las celebraciones más emotivas. Por eso, la decoración debe sentirse cálida y personal. Lo primero es hablar con los futuros padres: ¿qué colores les gustan? ¿Tienen algún tema en mente? ¿Prefieren algo minimalista o abundante?",
+        blog_3_full_2: "La mesa dulce es el corazón de la fiesta. Combina dulces con la paleta elegida: macarons, cake pops, galletas decoradas, mini tartas. Cada pieza puede llevar detalles que hagan referencia al bebé o al tema de la celebración.",
+        blog_3_full_3: "No olvides los detalles prácticos: etiquetas con los nombres, cajas para llevar dulces, y un libro de consejos para los padres. Todo suma para crear un recuerdo inolvidable.",
         contact_title: "¿Hablamos?",
         contact_text: "Cuéntanos tu idea y hagámosla realidad. Estamos en Madrid y atendemos toda la zona.",
         form_name: "Nombre",
@@ -1014,6 +1242,7 @@
       en: {
         header_title: "Made By AnaLu",
         header_subtitle: "Handcrafted sweet tables and decoration for your special events",
+        nav_about: "About",
         nav_gallery: "Gallery",
         nav_services: "Services",
         nav_blog: "Blog",
@@ -1021,7 +1250,7 @@
         hero_text: "Each table is unique, made with care and personalized for you",
         cta: "Get in Touch",
         gallery_title: "Our Work",
-        services_title: "What We Do",
+        services_title: "What I Do",
         service_1_title: "Birthdays",
         service_1_text: "Customized tables to celebrate each special year with love",
         service_2_title: "Baby Showers",
@@ -1037,6 +1266,16 @@
         blog_2_excerpt: "Pastel colors, gold details and natural textures dominate this year in wedding celebrations.",
         blog_3_title: "Baby shower: how to choose the perfect decoration",
         blog_3_excerpt: "Practical guide to plan a decoration that reflects the parents-to-be personality and creates a magical atmosphere.",
+        blog_readmore: "Read more",
+        blog_1_full_1: "Choosing the right theme is the first step. Think about what excites the birthday child: their favorite characters, a color they love, or an idea that matches the party decor. This year's most popular themes include nature, animals, and fantasy worlds.",
+        blog_1_full_2: "The key is in the small details: personalized napkins, themed confetti, labels on sweets with the child's name. Everything adds up to create a magical atmosphere without spending a fortune.",
+        blog_1_full_3: "And remember: every table is unique. Don't try to copy exactly what you see online, but adapt the ideas to the birthday child's taste and the space where you'll celebrate. That's what makes each work special.",
+        blog_2_full_1: "In 2026, weddings are betting on naturalness. Sand tones, sage green and dusty rose are the favorites. Pure whites and bright colors give way to a soft and elegant palette.",
+        blog_2_full_2: "Natural materials take center stage: wood, linen, artisanal ceramics. Sweet tables are decorated with dried flowers, olive branches, and pure wax candles. Everything conveys warmth and authenticity.",
+        blog_2_full_3: "Another strong trend is personalization: each wedding has its own story, and the sweet table must tell it. From monograms on cakes to colors that reflect the palette chosen for the entire wedding.",
+        blog_3_full_1: "The baby shower is one of the most emotional celebrations. That's why the decor should feel warm and personal. The first step is talking to the parents-to-be: what colors do they like? Do they have a theme in mind? Do they prefer something minimalist or abundant?",
+        blog_3_full_2: "The sweet table is the heart of the party. Combine sweets with the chosen palette: macarons, cake pops, decorated cookies, mini cakes. Each piece can carry details that reference the baby or the celebration theme.",
+        blog_3_full_3: "Don't forget practical details: labels with names, boxes to take sweets home, and a book of advice for the parents. Everything adds up to create an unforgettable memory.",
         contact_title: "Let's Talk",
         contact_text: "Tell us your idea and let's make it happen. We're in Madrid and serve the entire area.",
         form_name: "Name",
@@ -1058,6 +1297,7 @@
       pt: {
         header_title: "Made By AnaLu",
         header_subtitle: "Mesas doces e decoração artesanal para seus eventos especiais",
+        nav_about: "Sobre",
         nav_gallery: "Galeria",
         nav_services: "Serviços",
         nav_blog: "Blog",
@@ -1065,7 +1305,7 @@
         hero_text: "Cada mesa é única, feita com carinho e personalizada para ti",
         cta: "Pedir Informação",
         gallery_title: "Nosso Trabalho",
-        services_title: "O que fazemos",
+        services_title: "O que eu faço",
         service_1_title: "Aniversários",
         service_1_text: "Mesas personalizadas para celebrar cada ano especial com carinho",
         service_2_title: "Chás de Bebé",
@@ -1081,6 +1321,16 @@
         blog_2_excerpt: "Cores pastel, detalhes dourados e texturas naturais dominam este ano em celebrações nupciais.",
         blog_3_title: "Chá de bebê: como escolher a decoração perfeita",
         blog_3_excerpt: "Guia prático para planejar uma decoração que reflicta a personalidade dos futuros pais e crie uma atmosfera mágica.",
+        blog_readmore: "Ler mais",
+        blog_1_full_1: "Escolher o tema certo é o primeiro passo. Pensa no que encanta o aniversário: os seus personagens favoritos, uma cor que adora, ou uma ideia que combine com a decoração da festa. Os temas mais populares este ano incluem natureza, animais e mundos de fantasia.",
+        blog_1_full_2: "A chave está nos pequenos detalhes: guardanapos personalizados, confeti temático, etiquetas nos doces com o nome da criança. Tudo soma para criar uma atmosfera mágica sem precisar gastar uma fortuna.",
+        blog_1_full_3: "E lembra-te: cada mesa é única. Não tentes copiar exatamente o que vês na internet, mas adapta as ideias ao gosto do aniversariante e ao espaço onde vais celebrar. É isso que faz especial cada trabalho.",
+        blog_2_full_1: "Em 2026, os cas apostam na naturalidade. Os tons areia, verde sálvia e rosa empoeirado são os favoritos. Os brancos puros e as cores vibrantes dão lugar a uma paleta suave e elegante.",
+        blog_2_full_2: "Os materiais naturais ganham protagonismo: madeira, linho, cerâmica artesanal. As mesas doces são decoradas com flores secas, ramos de oliveira e velas de cera virgem. Tudo transmite calor e autenticidade.",
+        blog_2_full_3: "Outra tendência forte é a personalização: cada casamento tem a sua própria história, e a mesa doce deve contá-la. Desde monogramas nos bolos até cores que refletem a paleta escolhida para o casamento inteiro.",
+        blog_3_full_1: "O baby shower é uma das celebrações mais emotivas. Por isso, a decoração deve ser quente e pessoal. O primeiro passo é falar com os futuros pais: que cores gostam? Têm algum tema em mente? Preferem algo minimalista ou abundante?",
+        blog_3_full_2: "A mesa doce é o coração da festa. Combina doces com a paleta escolhida: macarons, cake pops, bolos decorados, mini tartelets. Cada peça pode levar detalhes que façam referência ao bebé ou ao tema da celebração.",
+        blog_3_full_3: "Não esqueças os detalhes práticos: etiquetas com os nomes, caixas para levar doces, e um livro de conselhos para os pais. Tudo soma para criar uma memória inesquecível.",
         contact_title: "Falamos?",
         contact_text: "Conte-nos a sua ideia e vamos torná-la realidade. Estamos em Madrid e atendemos toda a região.",
         form_name: "Nome",
@@ -1098,6 +1348,28 @@
         form_success_title: "Mensagem enviada!",
         form_success_text: "Obrigada por nos contactar. Responderemos em menos de 24 horas.",
         footer: "Feito com carinho"
+      }
+    };
+
+    // About section translations (kept separate to avoid cluttering main object)
+    const aboutTranslations = {
+      es: {
+        about_title: "Hola, soy AnaLu",
+        about_text_1: "Me llamo Ana Lu y hago mesas dulces desde mi casa en Madrid. Lo que empezó como un hobby para los cumpleaños de mis amigas se fue convirtiendo en algo más: cada mesa que hago lleva un pedazo de mi tiempo, mi cuidado y mi ilusión.",
+        about_text_2: "No trabajo con catálogos ni alquileres. Cada encargo es único: elijo los colores, las texturas y los detalles pensando en la persona que lo va a vivir y en el lugar donde se celebra. Para mí, una mesa dulce no es solo decoración — es la forma de decir 'te quiero' o 'enhorabuena' sin palabras.",
+        about_text_3: "Si te gusta lo que ves y quieres que hagamos algo juntas, escríbeme por Instagram o WhatsApp. Me encantará escuchar tu idea."
+      },
+      en: {
+        about_title: "Hi, I'm AnaLu",
+        about_text_1: "My name is Ana Lu and I make sweet tables from my home in Madrid. What started as a hobby for my friends' birthdays became something more: every table I make carries a piece of my time, my care, and my hope.",
+        about_text_2: "I don't work with catalogs or rentals. Every commission is unique: I choose colors, textures, and details thinking of the person who will live it and the place where it's celebrated. For me, a sweet table isn't just decoration — it's the way to say 'I love you' or 'congratulations' without words.",
+        about_text_3: "If you like what you see and want to make something together, write me on Instagram or WhatsApp. I'd love to hear your idea."
+      },
+      pt: {
+        about_title: "Olá, sou a AnaLu",
+        about_text_1: "Chamo-me Ana Lu e faço mesas doces desde minha casa em Madrid. O que começou como um hobby para os aniversários das minhas amigas foi-se tornando algo mais: cada mesa que faço leva um pedaço do meu tempo, do meu cuidado e da minha esperança.",
+        about_text_2: "Não trabalho com catálogos nem aluguéis. Cada encomenda é única: escolho as cores, as texturas e os detalhes pensando na pessoa que vai vivê-la e no lugar onde se celebra. Para mim, uma mesa doce não é apenas decoração — é a forma de dizer 'amo-te' ou 'parabéns' sem palavras.",
+        about_text_3: "Se gostas do que vês e queres fazer algo juntas, escreve-me no Instagram ou WhatsApp. Vou adorar ouvir a tua ideia."
       }
     };
 
@@ -1121,6 +1393,8 @@
           const key = el.dataset.i18n;
           if (translations[lang][key]) {
             el.textContent = translations[lang][key];
+          } else if (aboutTranslations[lang][key]) {
+            el.textContent = aboutTranslations[lang][key];
           }
         });
       });
@@ -1198,6 +1472,85 @@
       if (e.key === 'ArrowRight') navigateLightbox(1);
     });
 
+    // Blog Modal
+    const blogModal = document.getElementById('blogModal');
+    const blogModalImg = blogModal.querySelector('.blog-modal-img');
+    const blogModalDate = blogModal.querySelector('.blog-modal-date');
+    const blogModalTitle = blogModal.querySelector('.blog-modal-title');
+    const blogModalText = blogModal.querySelector('.blog-modal-text');
+    const blogCards = document.querySelectorAll('.blog-card');
+
+    const blogArticles = [
+      {
+        img: 'assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg',
+        alt: 'Decoración de mesa dulce infantil',
+        dateKey: 'blog_1_date',
+        titleKey: 'blog_1_title',
+        textKeys: ['blog_1_full_1', 'blog_1_full_2', 'blog_1_full_3']
+      },
+      {
+        img: 'assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg',
+        alt: 'Mesa dulce de boda',
+        dateKey: 'blog_2_date',
+        titleKey: 'blog_2_title',
+        textKeys: ['blog_2_full_1', 'blog_2_full_2', 'blog_2_full_3']
+      },
+      {
+        img: 'assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg',
+        alt: 'Decoración de baby shower',
+        dateKey: 'blog_3_date',
+        titleKey: 'blog_3_title',
+        textKeys: ['blog_3_full_1', 'blog_3_full_2', 'blog_3_full_3']
+      }
+    ];
+
+    const blogDates = {
+      es: ['25 Agosto 2026', '18 Agosto 2026', '10 Agosto 2026'],
+      en: ['August 25, 2026', 'August 18, 2026', 'August 10, 2026'],
+      pt: ['25 de Agosto de 2026', '18 de Agosto de 2026', '10 de Agosto de 2026']
+    };
+
+    function getCurrentLang() {
+      return document.documentElement.lang || 'es';
+    }
+
+    function openBlogModal(index) {
+      const lang = getCurrentLang();
+      const article = blogArticles[index];
+      const t = translations[lang] || translations.es;
+
+      blogModalImg.src = article.img;
+      blogModalImg.alt = article.alt;
+      blogModalDate.textContent = (blogDates[lang] || blogDates.es)[index];
+      blogModalTitle.textContent = t[article.titleKey];
+      blogModalText.innerHTML = article.textKeys.map(k => '<p>' + (t[k] || '') + '</p>').join('');
+
+      blogModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBlogModal() {
+      blogModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    blogCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const index = parseInt(card.dataset.blog);
+        openBlogModal(index);
+      });
+    });
+
+    blogModal.querySelector('.blog-modal-close').addEventListener('click', closeBlogModal);
+    blogModal.addEventListener('click', (e) => {
+      if (e.target === blogModal) closeBlogModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!blogModal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeBlogModal();
+    });
+
     // Contact Form
     const contactForm = document.getElementById('contactForm');
     const formSuccess = document.getElementById('formSuccess');
@@ -1209,8 +1562,5 @@
       formSuccess.classList.add('show');
     });
   </script>
-<!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js?token=df29e634-697f-447b-8984-a433342a6dec"></script>
-<!-- impeccable-live-end -->
 </body>
 </html>

@@ -12,11 +12,11 @@ delegated: plain static HTML/CSS + a lightweight vanilla-JS i18n layer (ES prima
 
 ## Users
 
-Primary users are people looking for party or event decoration — both hobbyists browsing for ideas and people actively seeking someone to prepare an event (birthdays, baby showers, weddings, romantic occasions). They arrive pre-disposed to beauty: they are evaluating examples and emotional fit as much as service details.
+Primary users are friends, family, and people who discover AnaLu's work through Instagram or word of mouth. They are browsing a personal portfolio — evaluating craft, style, and personal fit. Many arrive pre-disposed to beauty from social feeds; they are evaluating examples and emotional fit as much as anything.
 
 ## Product Purpose
 
-Made By AnaLu is a sweet-table decoration service. AnaLu handcrafts decoration for events such as birthdays, baby showers, weddings, and romantic occasions, working from a theme she chooses or one a client requests. The site exists to show her work, establish trust and craft, and turn interested visitors into direct inquiries. Success means the visitor understands the quality and personalization of the work and reaches out (Instagram, WhatsApp, or word of mouth).
+Made By AnaLu is a personal portfolio for AnaLu's sweet-table decoration hobby. She handcrafts decoration for events such as birthdays, baby showers, weddings, and romantic occasions, working from a theme she chooses or one a client requests. The site exists to introduce AnaLu as a person, showcase her work, and make it easy for interested people to reach out and connect. Success means the visitor meets AnaLu, sees the quality and care in her work, and gets in touch (Instagram, WhatsApp, or word of mouth). This is not a commercial service — it's a creative portfolio for exposure and community.
 
 ## Positioning
 
