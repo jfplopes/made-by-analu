@@ -798,8 +798,8 @@
     function openLightbox(index) {
       currentImageIndex = index;
       var jpgPath = images[index].src;
-      var avifPath = jpgPath.replace(/\.jpg$/i, '.avif');
-      lightboxAvif.srcset = avifPath;
+      var isImg = /IMG_\d+\.jpg$/i.test(portfolioPhotos[index] || '');
+      lightboxAvif.srcset = isImg ? jpgPath.replace(/\.jpg$/i, '.avif') : '';
       lightboxImg.src = jpgPath;
       lightboxImg.alt = images[index].alt;
       lightboxCounter.textContent = `${index + 1} / ${images.length}`;
@@ -817,8 +817,8 @@
     function navigateLightbox(dir) {
       currentImageIndex = (currentImageIndex + dir + portfolioPhotos.length) % portfolioPhotos.length;
       var jpgPath = 'assets/' + portfolioPhotos[currentImageIndex];
-      var avifPath = jpgPath.replace(/\.jpg$/i, '.avif');
-      lightboxAvif.srcset = avifPath;
+      var isImg = /IMG_\d+\.jpg$/i.test(portfolioPhotos[currentImageIndex]);
+      lightboxAvif.srcset = isImg ? jpgPath.replace(/\.jpg$/i, '.avif') : '';
       lightboxImg.src = jpgPath;
       lightboxImg.alt = 'Mesa dulce';
       lightboxCounter.textContent = (currentImageIndex + 1) + ' / ' + portfolioPhotos.length;
@@ -940,19 +940,24 @@
         pagePhotos.forEach(function(photo) {
           var item = document.createElement('div');
           item.className = 'gallery-item';
-          var picture = document.createElement('picture');
           var jpgPath = 'assets/' + photo;
-          var avifPath = jpgPath.replace(/\.jpg$/i, '.avif');
-          var source = document.createElement('source');
-          source.srcset = avifPath;
-          source.type = 'image/avif';
           var img = document.createElement('img');
           img.src = jpgPath;
           img.alt = 'Mesa dulce';
           img.loading = 'lazy';
-          picture.appendChild(source);
-          picture.appendChild(img);
-          item.appendChild(picture);
+          // Only add AVIF source for images that have an AVIF version (IMG_* files)
+          if (/IMG_\d+\.jpg$/i.test(photo)) {
+            var picture = document.createElement('picture');
+            var avifPath = jpgPath.replace(/\.jpg$/i, '.avif');
+            var source = document.createElement('source');
+            source.srcset = avifPath;
+            source.type = 'image/avif';
+            picture.appendChild(source);
+            picture.appendChild(img);
+            item.appendChild(picture);
+          } else {
+            item.appendChild(img);
+          }
           grid.appendChild(item);
         });
 
