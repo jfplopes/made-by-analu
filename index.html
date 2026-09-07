@@ -780,29 +780,20 @@
     });
 
     // ── Gallery Lightbox ──
-    const galleryItems = document.querySelectorAll('.gallery-item');
     const lightbox = document.querySelector('.lightbox');
     const lightboxImg = lightbox.querySelector('.lightbox-img');
     const lightboxAvif = lightbox.querySelector('.lightbox-avif');
     const lightboxCounter = lightbox.querySelector('.lightbox-counter');
     let currentImageIndex = 0;
-    const images = [];
-
-    galleryItems.forEach((item, i) => {
-      const img = item.querySelector('img');
-      images.push({ src: img.src, alt: img.alt });
-      item.addEventListener('click', () => openLightbox(i));
-      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
-    });
 
     function openLightbox(index) {
       currentImageIndex = index;
-      var jpgPath = images[index].src;
-      var isImg = /IMG_\d+\.jpg$/i.test(portfolioPhotos[index] || '');
+      var jpgPath = 'assets/' + portfolioPhotos[index];
+      var isImg = /IMG_\d+\.jpg$/i.test(portfolioPhotos[index]);
       lightboxAvif.srcset = isImg ? jpgPath.replace(/\.jpg$/i, '.avif') : '';
       lightboxImg.src = jpgPath;
-      lightboxImg.alt = images[index].alt;
-      lightboxCounter.textContent = `${index + 1} / ${images.length}`;
+      lightboxImg.alt = 'Mesa dulce';
+      lightboxCounter.textContent = (index + 1) + ' / ' + portfolioPhotos.length;
       lightbox.classList.add('active');
       lightbox.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -812,7 +803,6 @@
       lightbox.classList.remove('active');
       lightbox.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
-      galleryItems[currentImageIndex]?.focus();
     }
     function navigateLightbox(dir) {
       currentImageIndex = (currentImageIndex + dir + portfolioPhotos.length) % portfolioPhotos.length;
@@ -965,12 +955,7 @@
         var items = grid.querySelectorAll('.gallery-item');
         items.forEach(function(item, i) {
           item.addEventListener('click', function() {
-            var idx = start + i;
-            currentImageIndex = idx;
-            lightboxImg.src = 'assets/' + portfolioPhotos[idx];
-            lightboxImg.alt = 'Mesa dulce';
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            openLightbox(start + i);
           });
         });
 
