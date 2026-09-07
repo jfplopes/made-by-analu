@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Made By AnaLu — Editorial Redesign</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1715;
+      --paper: #faf9f7;
+      --warm: #f5f0eb;
+      --accent: #b8956a;
+      --accent-dark: #9a7a54;
+      --muted: #6b6560;
+      --border: #e5e0db;
+      --white: #ffffff;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --space-3xl: 8rem;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--paper);
+      -webkit-font-smoothing: antialiased;
+      font-weight: 400;
+    }
+
+    /* Language Switcher */
+    .lang-switch {
+      position: fixed;
+      top: var(--space-md);
+      right: var(--space-md);
+      z-index: 100;
+      display: flex;
+      gap: 2px;
+      background: var(--white);
+      padding: 4px;
+      border: 1px solid var(--border);
+      font-size: 0.7rem;
+    }
+    .lang-switch button {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lang-switch button:hover { color: var(--ink); }
+    .lang-switch button.active {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    /* Hero — Full editorial spread */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+    }
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-3xl) var(--space-2xl);
+      background: var(--paper);
+    }
+    .hero-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: var(--space-lg);
+      max-width: 500px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent-dark);
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: var(--space-xl);
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 4px;
+      transition: all 0.3s ease;
+      width: fit-content;
+    }
+    .hero-cta:hover {
+      color: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+    .hero-cta svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+    .hero-cta:hover svg { transform: translateX(4px); }
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Navigation — floating minimal */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-md) var(--space-lg);
+      mix-blend-mode: difference;
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    nav ul {
+      display: flex;
+      gap: var(--space-lg);
+      list-style: none;
+    }
+    nav a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transition: opacity 0.2s ease;
+    }
+    nav a:hover { opacity: 0.6; }
+
+    /* Section styling */
+    section {
+      padding: var(--space-3xl) var(--space-lg);
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+    .section-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      margin-bottom: var(--space-sm);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    /* Gallery — editorial masonry */
+    .gallery {
+      background: var(--paper);
+    }
+    .gallery-grid {
+      max-width: 1400px;
+      margin: 0 auto;
+      columns: 3;
+      column-gap: var(--space-md);
+    }
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: var(--space-md);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.03);
+    }
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 70%, rgba(26, 23, 21, 0.3) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* About — split layout */
+    .about {
+      background: var(--warm);
+    }
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2xl);
+      align-items: center;
+    }
+    .about-image {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-text h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 400;
+      margin-bottom: var(--space-lg);
+      line-height: 1.2;
+    }
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: var(--space-md);
+    }
+
+    /* Services — minimal cards */
+    .services {
+      background: var(--paper);
+    }
+    .services-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-lg);
+      text-align: center;
+    }
+    .service-item h4 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 500;
+      margin-bottom: var(--space-xs);
+    }
+    .service-item p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Contact — editorial close */
+    .contact {
+      background: var(--ink);
+      color: var(--white);
+    }
+    .contact .section-label { color: var(--accent); }
+    .contact .section-title { color: var(--white); }
+    .contact-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-intro {
+      color: rgba(255,255,255,0.6);
+      margin-bottom: var(--space-xl);
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      text-decoration: none;
+      padding: var(--space-sm) var(--space-lg);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+    .contact-link:hover {
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: var(--space-lg);
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-content { padding: var(--space-3xl) var(--space-lg) var(--space-xl); order: 2; }
+      .hero-image { height: 60vh; order: 1; }
+      .gallery-grid { columns: 2; }
+      .about-inner { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .gallery-grid { columns: 1; }
+      .services-grid { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+      section { padding: var(--space-2xl) var(--space-md); }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .fade-in:nth-child(2) { animation-delay: 0.1s; }
+    .fade-in:nth-child(3) { animation-delay: 0.2s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">Made By AnaLu</a>
+    <ul>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">Sobre mí</a></li>
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <!-- Language Switcher -->
+  <div class="lang-switch">
+    <button class="active" data-lang="es">ES</button>
+    <button data-lang="en">EN</button>
+    <button data-lang="pt">PT</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-label fade-in">Mesas dulces artesanales · Madrid</span>
+      <h1 class="hero-title fade-in">Cada mesa es una <em>historia</em></h1>
+      <p class="hero-subtitle fade-in">Decoración artesanal y personalizada para cumpleaños, bodas, baby showers y eventos especiales. Hechas con cariño en Madrid.</p>
+      <a href="#contact" class="hero-cta fade-in">
+        Hablemos
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="hero-image">
+      <img src="assets/WhatsApp Image 2026-09-04 at 17.37.05.jpeg" alt="Mesa dulce decorada" loading="eager">
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery" id="portfolio">
+    <div class="section-header">
+      <p class="section-label">Portfolio</p>
+      <h2 class="section-title">Trabajos recientes</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (1).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (3).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (4).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (6).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (8).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (9).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06.jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.53 (1).jpeg" alt="Mesa dulce" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.53 (2).jpeg" alt="Mesa dulce" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="about-inner">
+      <div class="about-image">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.39.04.jpeg" alt="AnaLu" loading="lazy">
+      </div>
+      <div class="about-text">
+        <p class="section-label">Sobre mí</p>
+        <h3>Hola, soy AnaLu</h3>
+        <p>Me encanta crear decoraciones únicas para eventos especiales. Cada mesa es pensada y diseñada para reflejar la personalidad del homenajeado y el espíritu del evento.</p>
+        <p>Trabajo en Madrid y alrededores, y cada pieza está hecha a mano con mucho cariño y atención al detalle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="section-header">
+      <p class="section-label">Servicios</p>
+      <h2 class="section-title">¿Qué puedo hacer por ti?</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item">
+        <h4>Cumpleaños</h4>
+        <p>Mesas dulces temáticas con decoración personalizada</p>
+      </div>
+      <div class="service-item">
+        <h4>Baby Shower</h4>
+        <p>Decoración especial para la llegada del pequeño</p>
+      </div>
+      <div class="service-item">
+        <h4>Bodas</h4>
+        <p>Mesas de dulces elegantes para tu día especial</p>
+      </div>
+      <div class="service-item">
+        <h4>Eventos</h4>
+        <p>Decoración para cualquier ocasión que quieras celebrar</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="section-header">
+      <p class="section-label">Contacto</p>
+      <h2 class="section-title">¿Hablamos?</h2>
+    </div>
+    <div class="contact-inner">
+      <p class="contact-intro">¿Tienes un evento en mente? Me encantaría escuchar tu idea y crear algo único para ti.</p>
+      <div class="contact-links">
+        <a href="https://instagram.com/" class="contact-link" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/" class="contact-link" target="_blank">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Hecho con cariño · Made By AnaLu</p>
+  </footer>
+
+  <script>
+    // Language switching
+    const translations = {
+      es: {
+        hero_label: 'Mesas dulces artesanales · Madrid',
+        hero_title: 'Cada mesa es una <em>historia</em>',
+        hero_subtitle: 'Decoración artesanal y personalizada para cumpleaños, bodas, baby showers y eventos especiales. Hechas con cariño en Madrid.',
+        hero_cta: 'Hablemos',
+        portfolio_label: 'Portfolio',
+        portfolio_title: 'Trabajos recientes',
+        about_label: 'Sobre mí',
+        about_title: 'Hola, soy AnaLu',
+        about_p1: 'Me encanta crear decoraciones únicas para eventos especiales. Cada mesa es pensada y diseñada para reflejar la personalidad del homenajeado y el espíritu del evento.',
+        about_p2: 'Trabajo en Madrid y alrededores, y cada pieza está hecha a mano con mucho cariño y atención al detalle.',
+        services_label: 'Servicios',
+        services_title: '¿Qué puedo hacer por ti?',
+        svc1_title: 'Cumpleaños', svc1_desc: 'Mesas dulces temáticas con decoración personalizada',
+        svc2_title: 'Baby Shower', svc2_desc: 'Decoración especial para la llegada del pequeño',
+        svc3_title: 'Bodas', svc3_desc: 'Mesas de dulces elegantes para tu día especial',
+        svc4_title: 'Eventos', svc4_desc: 'Decoración para cualquier ocasión que quieras celebrar',
+        contact_label: 'Contacto',
+        contact_title: '¿Hablamos?',
+        contact_intro: '¿Tienes un evento en mente? Me encantaría escuchar tu idea y crear algo único para ti.',
+        footer: 'Hecho con cariño · Made By AnaLu',
+        nav: ['Portfolio', 'Sobre mí', 'Servicios', 'Contacto']
+      },
+      en: {
+        hero_label: 'Handcrafted sweet tables · Madrid',
+        hero_title: 'Every table tells a <em>story</em>',
+        hero_subtitle: 'Artisanal, personalized decoration for birthdays, weddings, baby showers and special events. Made with love in Madrid.',
+        hero_cta: "Let's talk",
+        portfolio_label: 'Portfolio',
+        portfolio_title: 'Recent work',
+        about_label: 'About me',
+        about_title: "Hi, I'm AnaLu",
+        about_p1: "I love creating unique decorations for special events. Each table is designed to reflect the guest of honor's personality and the spirit of the celebration.",
+        about_p2: 'I work in Madrid and surrounding areas, and every piece is handmade with great care and attention to detail.',
+        services_label: 'Services',
+        services_title: 'What can I do for you?',
+        svc1_title: 'Birthdays', svc1_desc: 'Themed sweet tables with personalized decoration',
+        svc2_title: 'Baby Shower', svc2_desc: 'Special decoration for the arrival of the little one',
+        svc3_title: 'Weddings', svc3_desc: 'Elegant sweet tables for your special day',
+        svc4_title: 'Events', svc4_desc: 'Decoration for any occasion you want to celebrate',
+        contact_label: 'Contact',
+        contact_title: "Let's talk?",
+        contact_intro: 'Have an event in mind? I would love to hear your idea and create something unique for you.',
+        footer: 'Made with love · Made By AnaLu',
+        nav: ['Portfolio', 'About me', 'Services', 'Contact']
+      },
+      pt: {
+        hero_label: 'Mesas doces artesanais · Madrid',
+        hero_title: 'Cada mesa é uma <em>história</em>',
+        hero_subtitle: 'Decoração artesanal e personalizada para aniversários, casamentos, baby showers e eventos especiais. Feitas com carinho em Madrid.',
+        hero_cta: 'Vamos conversar',
+        portfolio_label: 'Portfólio',
+        portfolio_title: 'Trabalhos recentes',
+        about_label: 'Sobre mim',
+        about_title: 'Olá, eu sou a AnaLu',
+        about_p1: 'Adoro criar decorações únicas para eventos especiais. Cada mesa é pensada e projetada para refletir a personalidade do homenageado e o espírito do evento.',
+        about_p2: 'Trabalho em Madrid e arredores, e cada peça é feita à mão com muito carinho e atenção aos detalhes.',
+        services_label: 'Serviços',
+        services_title: 'O que posso fazer por você?',
+        svc1_title: 'Aniversários', svc1_desc: 'Mesas doces temáticas com decoração personalizada',
+        svc2_title: 'Baby Shower', svc2_desc: 'Decoração especial para a chegada do pequeno',
+        svc3_title: 'Casamentos', svc3_desc: 'Mesas de doces elegantes para seu dia especial',
+        svc4_title: 'Eventos', svc4_desc: 'Decoração para qualquer ocasião que queira celebrar',
+        contact_label: 'Contato',
+        contact_title: 'Vamos conversar?',
+        contact_intro: 'Tem um evento em mente? Adoraria ouvir sua ideia e criar algo único para você.',
+        footer: 'Feito com carinho · Made By AnaLu',
+        nav: ['Portfólio', 'Sobre mim', 'Serviços', 'Contato']
+      }
+    };
+
+    let currentLang = 'es';
+
+    function switchLang(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+      const t = translations[lang];
+
+      document.querySelector('.hero-label').textContent = t.hero_label;
+      document.querySelector('.hero-title').innerHTML = t.hero_title;
+      document.querySelector('.hero-subtitle').textContent = t.hero_subtitle;
+      document.querySelector('.hero-cta').childNodes[0].textContent = t.hero_cta + ' ';
+      document.querySelector('.section-label').textContent = t.portfolio_label;
+      document.querySelectorAll('.section-title')[0].textContent = t.portfolio_title;
+      document.querySelector('.about .section-label').textContent = t.about_label;
+      document.querySelector('.about-text h3').textContent = t.about_title;
+      document.querySelectorAll('.about-text p')[1].textContent = t.about_p1;
+      document.querySelectorAll('.about-text p')[2].textContent = t.about_p2;
+      document.querySelectorAll('.section-label')[2].textContent = t.services_label;
+      document.querySelectorAll('.section-title')[2].textContent = t.services_title;
+
+      const svcTitles = document.querySelectorAll('.service-item h4');
+      const svcDescs = document.querySelectorAll('.service-item p');
+      svcTitles[0].textContent = t.svc1_title; svcDescs[0].textContent = t.svc1_desc;
+      svcTitles[1].textContent = t.svc2_title; svcDescs[1].textContent = t.svc2_desc;
+      svcTitles[2].textContent = t.svc3_title; svcDescs[2].textContent = t.svc3_desc;
+      svcTitles[3].textContent = t.svc4_title; svcDescs[3].textContent = t.svc4_desc;
+
+      document.querySelectorAll('.section-label')[3].textContent = t.contact_label;
+      document.querySelectorAll('.section-title')[3].textContent = t.contact_title;
+      document.querySelector('.contact-intro').textContent = t.contact_intro;
+      document.querySelector('footer p').textContent = t.footer;
+
+      const navLinks = document.querySelectorAll('nav ul li a');
+      t.nav.forEach((text, i) => { if (navLinks[i]) navLinks[i].textContent = text; });
+
+      document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+      btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

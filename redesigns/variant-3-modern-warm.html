@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Made By AnaLu | Mesas Dulces Artesanales</title>
+  <meta name="description" content="Decoración artesanal y personalizada para cumpleaños, bodas, baby showers, Halloween, Navidad y eventos especiales en Madrid.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fefcfa;
+      --bg-warm: #faf6f1;
+      --bg-accent: #f7ede2;
+      --ink: #2c2420;
+      --ink-soft: #6b5e56;
+      --ink-dim: #a09488;
+      --terracotta: #c67d5b;
+      --terracotta-deep: #a8623f;
+      --terracotta-soft: rgba(198, 125, 91, 0.1);
+      --sage: #8a9a7b;
+      --border: #ebe4dc;
+      --white: #ffffff;
+
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+      --space-3xl: 8rem;
+
+      --radius: 16px;
+      --radius-sm: 10px;
+
+      --shadow-sm: 0 2px 8px rgba(44, 36, 32, 0.04);
+      --shadow-md: 0 4px 16px rgba(44, 36, 32, 0.06);
+      --shadow-lg: 0 8px 32px rgba(44, 36, 32, 0.08);
+      --shadow-hover: 0 12px 40px rgba(44, 36, 32, 0.1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      font-weight: 400;
+    }
+
+    ::selection { background: var(--terracotta-soft); color: var(--ink); }
+    :focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; border-radius: 4px; }
+
+    /* Language Switcher */
+    .lang-switch {
+      position: fixed;
+      top: var(--space-md);
+      right: var(--space-md);
+      z-index: 100;
+      display: flex;
+      gap: 2px;
+      background: var(--white);
+      padding: 4px;
+      border-radius: 100px;
+      box-shadow: var(--shadow-md);
+    }
+    .lang-switch button {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ink-dim);
+      background: transparent;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .lang-switch button:hover { color: var(--ink); }
+    .lang-switch button.active { background: var(--ink); color: var(--white); }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: var(--space-md);
+      left: var(--space-md);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      background: rgba(254, 252, 250, 0.92);
+      backdrop-filter: blur(12px);
+      padding: 12px 28px;
+      border-radius: 100px;
+      box-shadow: var(--shadow-md);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1rem; color: var(--ink); text-decoration: none; }
+    .nav-logo:hover { color: var(--terracotta); }
+    nav ul { display: flex; gap: var(--space-md); list-style: none; }
+    nav a { font-size: 0.78rem; font-weight: 500; color: var(--ink-soft); text-decoration: none; transition: color 0.2s ease; }
+    nav a:hover { color: var(--terracotta); }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+      padding: var(--space-3xl) var(--space-xl);
+      max-width: 1400px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .hero-content { padding-right: var(--space-lg); }
+    .hero-brand {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400;
+      color: var(--ink-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: var(--space-md);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.08;
+      color: var(--ink);
+      margin-bottom: var(--space-lg);
+      letter-spacing: -0.01em;
+    }
+    .hero-title em { font-style: italic; color: var(--terracotta); }
+    .hero-subtitle { font-size: 1.05rem; color: var(--ink-soft); max-width: 42ch; line-height: 1.7; margin-bottom: var(--space-xl); }
+    .hero-actions { display: flex; gap: var(--space-sm); flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: var(--space-xs);
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 600;
+      color: var(--white); background: var(--ink); text-decoration: none;
+      padding: 14px 30px; border-radius: 100px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-primary:hover { background: var(--terracotta); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(198, 125, 91, 0.3); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: var(--space-xs);
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+      color: var(--ink); background: transparent; text-decoration: none;
+      padding: 14px 30px; border-radius: 100px; border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    .btn-secondary:hover { border-color: var(--ink); background: var(--bg-warm); }
+    .section-badge {
+      display: inline-block; font-size: 0.65rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.15em; color: var(--terracotta);
+      background: var(--terracotta-soft); padding: 6px 14px; border-radius: 100px;
+      margin-bottom: var(--space-sm);
+    }
+    .hero-images { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: var(--space-sm); height: 70vh; max-height: 580px; }
+    .hero-img-main { grid-row: 1 / 3; border-radius: var(--radius); overflow: hidden; }
+    .hero-img-main img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-img-secondary { border-radius: var(--radius); overflow: hidden; }
+    .hero-img-secondary img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Sections */
+    section { padding: var(--space-3xl) var(--space-xl); max-width: 1400px; margin: 0 auto; }
+    .section-header { margin-bottom: var(--space-2xl); }
+    .section-header h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: var(--ink); }
+    .section-header p { margin-top: var(--space-sm); color: var(--ink-dim); font-size: 0.95rem; }
+    .section-header.centered { text-align: center; }
+
+    /* Gallery */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 280px; gap: var(--space-md); }
+    .gallery-item { position: relative; border-radius: var(--radius); overflow: hidden; cursor: pointer; background: var(--bg-accent); }
+    .gallery-item.tall { grid-row: span 2; }
+    .gallery-item.wide { grid-column: span 2; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+    .gallery-item:hover img { transform: scale(1.03); }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(44, 36, 32, 0.95);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .lightbox.active { opacity: 1; visibility: visible; }
+    .lightbox-img {
+      max-width: 90vw; max-height: 85vh; object-fit: contain;
+      border-radius: var(--radius-sm);
+      transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .lightbox.active .lightbox-img { transform: scale(1); }
+    .lightbox-close {
+      position: absolute; top: var(--space-lg); right: var(--space-lg);
+      width: 44px; height: 44px; background: rgba(255,255,255,0.1);
+      border: none; border-radius: 50%; color: white; font-size: 1.5rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px; background: rgba(255,255,255,0.1);
+      border: none; border-radius: 50%; color: white; font-size: 1.2rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-prev { left: var(--space-lg); }
+    .lightbox-next { right: var(--space-lg); }
+    .lightbox-counter {
+      position: absolute; bottom: var(--space-lg); left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+
+    /* Blog */
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-lg); }
+    .blog-card {
+      background: var(--white); border-radius: var(--radius); overflow: hidden; cursor: pointer;
+      border: 1px solid var(--border); transition: all 0.3s ease;
+    }
+    .blog-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .blog-card-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .blog-card-body { padding: var(--space-md); }
+    .blog-card-date { font-size: 0.7rem; font-weight: 500; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-xs); }
+    .blog-card-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: var(--space-xs); line-height: 1.3; }
+    .blog-card-excerpt { font-size: 0.85rem; color: var(--ink-dim); line-height: 1.6; margin-bottom: var(--space-sm); }
+    .blog-card-readmore {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      font-size: 0.8rem; font-weight: 500; color: var(--terracotta);
+      cursor: pointer; border: none; background: none; padding: 0;
+      transition: color 0.2s;
+    }
+    .blog-card-readmore:hover { color: var(--terracotta-deep); }
+
+    /* Blog Modal */
+    .blog-modal {
+      position: fixed; inset: 0; z-index: 1001;
+      background: rgba(44, 36, 32, 0.9);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: var(--space-lg);
+    }
+    .blog-modal.active { opacity: 1; visibility: visible; }
+    .blog-modal-content {
+      background: var(--white); border-radius: var(--radius); max-width: 720px; width: 100%;
+      max-height: 85vh; overflow-y: auto; position: relative;
+      transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .blog-modal.active .blog-modal-content { transform: translateY(0); }
+    .blog-modal-close {
+      position: sticky; top: var(--space-md); float: right; margin-right: var(--space-md);
+      width: 36px; height: 36px; background: rgba(0,0,0,0.05); border: none;
+      border-radius: 50%; font-size: 1.2rem; cursor: pointer; z-index: 2;
+      display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+    }
+    .blog-modal-close:hover { background: rgba(0,0,0,0.1); }
+    .blog-modal-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius) var(--radius) 0 0; }
+    .blog-modal-body { padding: var(--space-xl); }
+    .blog-modal-date { font-size: 0.7rem; font-weight: 500; color: var(--terracotta); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: var(--space-xs); }
+    .blog-modal-title { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 400; margin-bottom: var(--space-lg); line-height: 1.2; }
+    .blog-modal-text p { color: var(--ink-soft); line-height: 1.8; margin-bottom: var(--space-md); font-size: 0.95rem; }
+    .blog-modal-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--space-md) var(--space-xl); border-top: 1px solid var(--border);
+      margin-top: var(--space-lg);
+    }
+    .blog-modal-nav button {
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 500;
+      color: var(--terracotta); background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; gap: var(--space-xs);
+      transition: color 0.2s;
+    }
+    .blog-modal-nav button:hover { color: var(--terracotta-deep); }
+    .blog-modal-nav button:disabled { color: var(--ink-dim); cursor: default; }
+    .blog-modal-nav .blog-modal-dots { display: flex; gap: 6px; }
+    .blog-modal-nav .dot {
+      width: 8px; height: 8px; border-radius: 50%; background: var(--border);
+      cursor: pointer; transition: background 0.2s;
+    }
+    .blog-modal-nav .dot.active { background: var(--terracotta); }
+
+    /* About */
+    .about { background: var(--bg-warm); padding: var(--space-2xl) var(--space-xl); max-width: none; }
+    .about-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.3fr; gap: var(--space-2xl); align-items: center; }
+    .about-image { border-radius: var(--radius); overflow: hidden; aspect-ratio: 3/4; box-shadow: var(--shadow-lg); }
+    .about-image img { width: 100%; height: 100%; object-fit: cover; }
+    .about-text h3 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 400; margin-bottom: var(--space-lg); line-height: 1.15; }
+    .about-text p { color: var(--ink-soft); line-height: 1.8; margin-bottom: var(--space-md); max-width: 60ch; }
+
+    /* Services */
+    .services { background: var(--bg); }
+    .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+    .service-item {
+      text-align: center; padding: var(--space-lg) var(--space-md);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      transition: all 0.3s ease;
+    }
+    .service-item:hover { border-color: var(--terracotta); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .service-icon {
+      width: 48px; height: 48px; background: var(--terracotta-soft);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto var(--space-md); font-size: 1.3rem;
+    }
+    .service-item h4 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; margin-bottom: var(--space-xs); }
+    .service-item p { font-size: 0.82rem; color: var(--ink-dim); line-height: 1.5; max-width: 28ch; margin: 0 auto; }
+
+    /* Contact */
+    .contact-section { background: var(--bg-warm); padding: var(--space-2xl) var(--space-xl); max-width: none; }
+    .contact-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+    .contact-inner h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; margin-bottom: var(--space-md); }
+    .contact-intro { color: var(--ink-soft); margin-bottom: var(--space-xl); line-height: 1.7; max-width: 50ch; margin-left: auto; margin-right: auto; }
+    .contact-links { display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: var(--space-sm);
+      font-size: 0.8rem; font-weight: 500; color: var(--ink); text-decoration: none;
+      padding: 14px 28px; background: var(--white); border-radius: 100px;
+      border: 1px solid var(--border); transition: all 0.3s ease;
+    }
+    .contact-link:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .contact-link svg { width: 18px; height: 18px; }
+
+    /* Footer */
+    footer { padding: var(--space-xl) var(--space-lg); text-align: center; }
+    footer p { font-size: 0.7rem; color: var(--ink-dim); letter-spacing: 0.05em; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 100px; }
+      .hero-content { padding-right: 0; text-align: center; order: 2; }
+      .hero-subtitle { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-images { height: 50vh; order: 1; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 220px; }
+      .gallery-item.tall { grid-row: span 2; }
+      .gallery-item.wide { grid-column: span 1; }
+      .about-inner { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .blog-grid { grid-template-columns: repeat(2, 1fr); }
+      nav { left: 50%; transform: translateX(-50%); }
+      section, .about, .contact-section { padding: var(--space-2xl) var(--space-lg); }
+    }
+    @media (max-width: 600px) {
+      .hero-images { height: 40vh; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 280px; }
+      .gallery-item.tall { grid-row: span 1; }
+      .services-grid { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+      section, .about, .contact-section { padding: var(--space-xl) var(--space-md); }
+      .blog-modal-body { padding: var(--space-md); }
+      .blog-modal-nav { padding: var(--space-sm) var(--space-md); }
+    }
+
+    /* Gallery entrance animation */
+    @keyframes galleryReveal {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .gallery-item { opacity: 0; animation: galleryReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    .gallery-item:nth-child(1) { animation-delay: 0s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.08s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.16s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.24s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.32s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(7) { animation-delay: 0.48s; }
+    .gallery-item:nth-child(8) { animation-delay: 0.56s; }
+    .gallery-item:nth-child(9) { animation-delay: 0.64s; }
+    @media (prefers-reduced-motion: reduce) {
+      .gallery-item { animation: none; opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#portfolio" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:var(--terracotta);color:white;padding:8px 16px;font-size:0.8rem;">Saltar al contenido</a>
+
+  <nav>
+    <a href="#" class="nav-logo">Made By AnaLu</a>
+    <ul>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#about">Sobre mí</a></li>
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div class="lang-switch">
+    <button class="active" data-lang="es" aria-label="Español">ES</button>
+    <button data-lang="en" aria-label="English">EN</button>
+    <button data-lang="pt" aria-label="Português">PT</button>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-brand">Made By AnaLu</h1>
+      <span class="section-badge hero-badge">✦ Mesas dulces artesanales</span>
+      <h2 class="hero-title">Cada mesa es una <em>historia</em></h2>
+      <p class="hero-subtitle">Decoración artesanal y personalizada para cumpleaños, bodas, baby showers, Halloween, Navidad y eventos especiales. Hechas con cariño en Madrid.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Hablemos</a>
+        <a href="#portfolio" class="btn-secondary">Ver trabajo ↓</a>
+      </div>
+    </div>
+    <div class="hero-images">
+      <div class="hero-img-main">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.05.jpeg" alt="Mesa dulce decorada con dulces artesanales" width="600" height="800" loading="eager">
+      </div>
+      <div class="hero-img-secondary">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Detalle de mesa dulce" width="400" height="400" loading="eager">
+      </div>
+      <div class="hero-img-secondary">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Decoración artesanal" width="400" height="400" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <div class="about" id="about">
+    <div class="about-inner">
+      <div class="about-image">
+        <img src="assets/WhatsApp Image 2026-09-04 at 17.39.04.jpeg" alt="AnaLu, decoradora de mesas dulces" width="500" height="667" loading="lazy">
+      </div>
+      <div class="about-text">
+        <span class="section-badge about-badge">Sobre mí</span>
+        <h3>Hola, soy AnaLu</h3>
+        <p>Me encanta crear decoraciones únicas para eventos especiales. Cada mesa es pensada y diseñada para reflejar la personalidad del homenajeado y el espíritu del evento.</p>
+        <p>Trabajo en Madrid y alrededores, y cada pieza está hecha a mano con mucho cariño y atención al detalle.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <section id="portfolio">
+    <div class="section-header centered">
+      <span class="section-badge portfolio-badge">Portfolio</span>
+      <h2>Trabajos recientes</h2>
+      <p>Cada pieza, única y hecha a mano</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (1).jpeg" alt="Mesa dulce infantil" width="400" height="600" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (3).jpeg" alt="Mesa dulce para boda" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (4).jpeg" alt="Decoración de pastel" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item wide"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (6).jpeg" alt="Mesa dulce completa" width="800" height="400" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Detalle de dulces" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (8).jpeg" alt="Mesa dulce para baby shower" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item tall"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (9).jpeg" alt="Mesa dulce elegante" width="400" height="600" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.06.jpeg" alt="Decoración de evento" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.53 (1).jpeg" alt="Mesa dulce temática" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.53 (2).jpeg" alt="Decoración artesanal" width="400" height="400" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/WhatsApp Image 2026-09-04 at 17.37.53 (3).jpeg" alt="Mesa de dulces" width="400" height="400" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" role="dialog" aria-label="Galería de imágenes" aria-hidden="true">
+    <button class="lightbox-close" aria-label="Cerrar">✕</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="Anterior">‹</button>
+    <img class="lightbox-img" src="" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="Siguiente">›</button>
+    <div class="lightbox-counter"></div>
+  </div>
+
+  <!-- Services -->
+  <section class="services" id="services">
+    <div class="section-header centered">
+      <span class="section-badge services-badge">Servicios</span>
+      <h2>¿Qué puedo hacer por ti?</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-item"><div class="service-icon">🎂</div><h4>Cumpleaños</h4><p>Mesas dulces temáticas con decoración personalizada</p></div>
+      <div class="service-item"><div class="service-icon">👶</div><h4>Baby Shower</h4><p>Decoración especial para la llegada del pequeño</p></div>
+      <div class="service-item"><div class="service-icon">💒</div><h4>Bodas</h4><p>Mesas de dulces elegantes para tu día especial</p></div>
+      <div class="service-item"><div class="service-icon">🎃</div><h4>Halloween</h4><p>Mesas temáticas con encanto misterioso para la noche más divertida</p></div>
+      <div class="service-item"><div class="service-icon">🎄</div><h4>Navidad</h4><p>Decoración navideña llena de calidez y espíritu festivo</p></div>
+      <div class="service-item"><div class="service-icon">🎉</div><h4>Eventos</h4><p>Decoración para cualquier ocasión que quieras celebrar</p></div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog">
+    <div class="section-header centered">
+      <span class="section-badge blog-badge">Blog</span>
+      <h2>Historias y consejos</h2>
+    </div>
+    <div class="blog-grid">
+      <article class="blog-card" data-blog="0">
+        <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg" alt="Decoración de mesa dulce" width="600" height="338" loading="lazy">
+        <div class="blog-card-body">
+          <div class="blog-card-date">25 Agosto 2026</div>
+          <h4 class="blog-card-title">Ideas para una mesa dulce de cumpleaños infantil</h4>
+          <p class="blog-card-excerpt">Descubre cómo crear una mesa dulces temática que sorprenda a los más pequeños con colores, texturas y detalles únicos.</p>
+          <button class="blog-card-readmore">Leer más →</button>
+        </div>
+      </article>
+      <article class="blog-card" data-blog="1">
+        <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg" alt="Decoración de mesa dulce" width="600" height="338" loading="lazy">
+        <div class="blog-card-body">
+          <div class="blog-card-date">18 Agosto 2026</div>
+          <h4 class="blog-card-title">Tendencias en mesas dulces para bodas 2026</h4>
+          <p class="blog-card-excerpt">Los colores pastel, los detalles dorados y las texturas naturales dominan este año en celebraciones nupciales.</p>
+          <button class="blog-card-readmore">Leer más →</button>
+        </div>
+      </article>
+      <article class="blog-card" data-blog="2">
+        <img class="blog-card-img" src="assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg" alt="Decoración de mesa dulce" width="600" height="338" loading="lazy">
+        <div class="blog-card-body">
+          <div class="blog-card-date">10 Agosto 2026</div>
+          <h4 class="blog-card-title">Baby shower: cómo elegir la decoración perfecta</h4>
+          <p class="blog-card-excerpt">Guía práctica para planificar una decoración que refleje la personalidad de los futuros padres y cree un ambiente mágico.</p>
+          <button class="blog-card-readmore">Leer más →</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Blog Modal -->
+  <div class="blog-modal" role="dialog" aria-label="Artículo del blog" aria-hidden="true">
+    <div class="blog-modal-content">
+      <button class="blog-modal-close" aria-label="Cerrar">✕</button>
+      <img class="blog-modal-img" src="" alt="">
+      <div class="blog-modal-body">
+        <div class="blog-modal-date"></div>
+        <h2 class="blog-modal-title"></h2>
+        <div class="blog-modal-text"></div>
+      </div>
+      <div class="blog-modal-nav">
+        <button class="blog-modal-prev" aria-label="Anterior">← Anterior</button>
+        <div class="blog-modal-dots"></div>
+        <button class="blog-modal-next" aria-label="Siguiente">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact -->
+  <div class="contact-section" id="contact">
+    <div class="contact-inner">
+      <span class="section-badge contact-badge">Contacto</span>
+      <h2>¿Hablamos?</h2>
+      <p class="contact-intro">¿Tienes un evento en mente? Me encantaría escuchar tu idea y crear algo único para ti.</p>
+      <div class="contact-links">
+        <a href="https://instagram.com/" class="contact-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          Instagram
+        </a>
+        <a href="https://wa.me/" class="contact-link" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Hecho con cariño · Made By AnaLu</p>
+  </footer>
+
+  <script>
+    const translations = {
+      es: {
+        heroBadge: '✦ Mesas dulces artesanales',
+        heroBrand: 'Made By AnaLu',
+        title: 'Cada mesa es una <em>historia</em>',
+        subtitle: 'Decoración artesanal y personalizada para cumpleaños, bodas, baby showers, Halloween, Navidad y eventos especiales. Hechas con cariño en Madrid.',
+        cta: 'Hablemos', secondary: 'Ver trabajo ↓',
+        portfolioBadge: 'Portfolio', portfolioTitle: 'Trabajos recientes', portfolioSub: 'Cada pieza, única y hecha a mano',
+        aboutBadge: 'Sobre mí', aboutTitle: 'Hola, soy AnaLu',
+        aboutP1: 'Me encanta crear decoraciones únicas para eventos especiales. Cada mesa es pensada y diseñada para reflejar la personalidad del homenajeado y el espíritu del evento.',
+        aboutP2: 'Trabajo en Madrid y alrededores, y cada pieza está hecha a mano con mucho cariño y atención al detalle.',
+        servicesBadge: 'Servicios', servicesTitle: '¿Qué puedo hacer por ti?',
+        svc1: 'Cumpleaños', svc1d: 'Mesas dulces temáticas con decoración personalizada',
+        svc2: 'Baby Shower', svc2d: 'Decoración especial para la llegada del pequeño',
+        svc3: 'Bodas', svc3d: 'Mesas de dulces elegantes para tu día especial',
+        svc4: 'Halloween', svc4d: 'Mesas temáticas con encanto misterioso para la noche más divertida',
+        svc5: 'Navidad', svc5d: 'Decoración navideña llena de calidez y espíritu festivo',
+        svc6: 'Eventos', svc6d: 'Decoración para cualquier ocasión que quieras celebrar',
+        blogBadge: 'Blog', blogTitle: 'Historias y consejos',
+        blog1Date: '25 Agosto 2026', blog1Title: 'Ideas para una mesa dulce de cumpleaños infantil',
+        blog1Excerpt: 'Descubre cómo crear una mesa dulces temática que sorprenda a los más pequeños con colores, texturas y detalles únicos.',
+        blog2Date: '18 Agosto 2026', blog2Title: 'Tendencias en mesas dulces para bodas 2026',
+        blog2Excerpt: 'Los colores pastel, los detalles dorados y las texturas naturales dominan este año en celebraciones nupciales.',
+        blog3Date: '10 Agosto 2026', blog3Title: 'Baby shower: cómo elegir la decoración perfecta',
+        blog3Excerpt: 'Guía práctica para planificar una decoración que refleje la personalidad de los futuros padres y cree un ambiente mágico.',
+        blogReadMore: 'Leer más →', prev: '← Anterior', next: 'Siguiente →',
+        blog1Full: ['Elegir el tema correcto es el primer paso. Piensa en lo que le ilusiona al cumpleañero: sus personajes favoritos, un color que le encante, o una idea que combine con la decoración de la fiesta. Los temas más populares este año incluyen naturaleza, animales y mundos de fantasía.', 'La clave está en los detalles pequeños: servilletas personalizadas, confeti temático, labels en los dulces con el nombre del niño. Todo suma para crear una atmósfera mágica sin necesidad de gastar una fortuna.', 'Y recuerda: cada mesa es única. No busques copiar exactamente lo que ves en internet, sino adaptar las ideas al gusto del cumpleañero y al espacio donde celebrarás. Eso es lo que hace especial cada trabajo.'],
+        blog2Full: ['Este 2026, las bodas apuestan por la naturalidad. Los tonos arena, verde salvia y rosa empolvado son los favoritos. Se alejan los blancos puros y los colores brillantes para dar paso a una paleta suave y elegante.', 'Los materiales naturales ganan protagonismo: madera, lino, cerámica artesanal. Las mesas dulces se decoran con flores secas, ramas de olivo y velas de cera virgen. Todo transmite calidez y autenticidad.', 'Otra tendencia fuerte es la personalización: cada boda tiene su propia historia, y la mesa dulce debe contarla. Desde monogramas en los pasteles hasta colores que reflejen la paleta elegida para la boda entera.'],
+        blog3Full: ['El baby shower es una de las celebraciones más emotivas. Por eso, la decoración debe sentirse cálida y personal. Lo primero es hablar con los futuros padres: ¿qué colores les gustan? ¿Tienen algún tema en mente? ¿Prefieren algo minimalista o abundante?', 'La mesa dulce es el corazón de la fiesta. Combina dulces con la paleta elegida: macarons, cake pops, galletas decoradas, mini tartas. Cada pieza puede llevar detalles que hagan referencia al bebé o al tema de la celebración.', 'No olvides los detalles prácticos: etiquetas con los nombres, cajas para llevar dulces, y un libro de consejos para los padres. Todo suma para crear un recuerdo inolvidable.'],
+        contactBadge: 'Contacto', contactTitle: '¿Hablamos?',
+        contactIntro: '¿Tienes un evento en mente? Me encantaría escuchar tu idea y crear algo único para ti.',
+        footer: 'Hecho con cariño · Made By AnaLu',
+        nav: ['Portfolio', 'Sobre mí', 'Servicios', 'Blog', 'Contacto']
+      },
+      en: {
+        heroBadge: '✦ Handcrafted sweet tables',
+        heroBrand: 'Made By AnaLu',
+        title: 'Every table tells a <em>story</em>',
+        subtitle: 'Artisanal, personalized decoration for birthdays, weddings, baby showers, Halloween, Christmas and special events. Made with love in Madrid.',
+        cta: "Let's talk", secondary: 'See work ↓',
+        portfolioBadge: 'Portfolio', portfolioTitle: 'Recent work', portfolioSub: 'Each piece, unique and handmade',
+        aboutBadge: 'About me', aboutTitle: "Hi, I'm AnaLu",
+        aboutP1: "I love creating unique decorations for special events. Each table is designed to reflect the guest of honor's personality and the spirit of the celebration.",
+        aboutP2: 'I work in Madrid and surrounding areas, and every piece is handmade with great care and attention to detail.',
+        servicesBadge: 'Services', servicesTitle: 'What can I do for you?',
+        svc1: 'Birthdays', svc1d: 'Themed sweet tables with personalized decoration',
+        svc2: 'Baby Shower', svc2d: 'Special decoration for the arrival of the little one',
+        svc3: 'Weddings', svc3d: 'Elegant sweet tables for your special day',
+        svc4: 'Halloween', svc4d: 'Themed tables with mysterious charm for the most fun night',
+        svc5: 'Christmas', svc5d: 'Warm and festive decoration for your holiday celebration',
+        svc6: 'Events', svc6d: 'Decoration for any occasion you want to celebrate',
+        blogBadge: 'Blog', blogTitle: 'Stories and tips',
+        blog1Date: 'August 25, 2026', blog1Title: 'Ideas for a children\'s birthday sweet table',
+        blog1Excerpt: 'Discover how to create a themed sweet table that surprises the little ones with colors, textures and unique details.',
+        blog2Date: 'August 18, 2026', blog2Title: 'Sweet table trends for weddings 2026',
+        blog2Excerpt: 'Pastel colors, gold details and natural textures dominate this year in wedding celebrations.',
+        blog3Date: 'August 10, 2026', blog3Title: 'Baby shower: how to choose the perfect decoration',
+        blog3Excerpt: 'Practical guide to plan a decoration that reflects the parents-to-be personality and creates a magical atmosphere.',
+        blogReadMore: 'Read more →', prev: '← Previous', next: 'Next →',
+        blog1Full: ['Choosing the right theme is the first step. Think about what excites the birthday child: their favorite characters, a color they love, or an idea that matches the party decor. This year\'s most popular themes include nature, animals, and fantasy worlds.', 'The key is in the small details: personalized napkins, themed confetti, labels on sweets with the child\'s name. Everything adds up to create a magical atmosphere without spending a fortune.', 'And remember: every table is unique. Don\'t try to copy exactly what you see online, but adapt the ideas to the birthday child\'s taste and the space where you\'ll celebrate. That\'s what makes each work special.'],
+        blog2Full: ['In 2026, weddings are betting on naturalness. Sand tones, sage green and dusty rose are the favorites. Pure whites and bright colors give way to a soft and elegant palette.', 'Natural materials take center stage: wood, linen, artisanal ceramics. Sweet tables are decorated with dried flowers, olive branches, and pure wax candles. Everything conveys warmth and authenticity.', 'Another strong trend is personalization: each wedding has its own story, and the sweet table must tell it. From monograms on cakes to colors that reflect the palette chosen for the entire wedding.'],
+        blog3Full: ['The baby shower is one of the most emotional celebrations. That\'s why the decor should feel warm and personal. The first step is talking to the parents-to-be: what colors do they like? Do they have a theme in mind? Do they prefer something minimalist or abundant?', 'The sweet table is the heart of the party. Combine sweets with the chosen palette: macarons, cake pops, decorated cookies, mini cakes. Each piece can carry details that reference the baby or the celebration theme.', 'Don\'t forget practical details: labels with names, boxes to take sweets home, and a book of advice for the parents. Everything adds up to create an unforgettable memory.'],
+        contactBadge: 'Contact', contactTitle: "Let's talk?",
+        contactIntro: 'Have an event in mind? I would love to hear your idea and create something unique for you.',
+        footer: 'Made with love · Made By AnaLu',
+        nav: ['Portfolio', 'About me', 'Services', 'Blog', 'Contact']
+      },
+      pt: {
+        heroBadge: '✦ Mesas doces artesanais',
+        heroBrand: 'Made By AnaLu',
+        title: 'Cada mesa é uma <em>história</em>',
+        subtitle: 'Decoração artesanal e personalizada para aniversários, casamentos, baby showers, Halloween, Natal e eventos especiais. Feitas com carinho em Madrid.',
+        cta: 'Vamos conversar', secondary: 'Ver trabalho ↓',
+        portfolioBadge: 'Portfólio', portfolioTitle: 'Trabalhos recentes', portfolioSub: 'Cada peça, única e feita à mão',
+        aboutBadge: 'Sobre mim', aboutTitle: 'Olá, eu sou a AnaLu',
+        aboutP1: 'Adoro criar decorações únicas para eventos especiais. Cada mesa é pensada e projetada para refletir a personalidade do homenageado e o espírito do evento.',
+        aboutP2: 'Trabalho em Madrid e arredores, e cada peça é feita à mão com muito carinho e atenção aos detalhes.',
+        servicesBadge: 'Serviços', servicesTitle: 'O que posso fazer por você?',
+        svc1: 'Aniversários', svc1d: 'Mesas doces temáticas com decoração personalizada',
+        svc2: 'Baby Shower', svc2d: 'Decoração especial para a chegada do pequeno',
+        svc3: 'Casamentos', svc3d: 'Mesas de doces elegantes para seu dia especial',
+        svc4: 'Halloween', svc4d: 'Mesas temáticas com encanto misterioso para a noite mais divertida',
+        svc5: 'Natal', svc5d: 'Decoração natalina cheia de calor e espírito festivo',
+        svc6: 'Eventos', svc6d: 'Decoração para qualquer ocasião que queira celebrar',
+        blogBadge: 'Blog', blogTitle: 'Histórias e dicas',
+        blog1Date: '25 de Agosto de 2026', blog1Title: 'Ideias para uma mesa doce de aniversário infantil',
+        blog1Excerpt: 'Descubra como criar uma mesa doce temática que surpreenda os pequenos com cores, texturas e detalhes únicos.',
+        blog2Date: '18 de Agosto de 2026', blog2Title: 'Tendências em mesas doces para casamentos 2026',
+        blog2Excerpt: 'Cores pastel, detalhes dourados e texturas naturais dominam este ano em celebrações nupciais.',
+        blog3Date: '10 de Agosto de 2026', blog3Title: 'Chá de bebê: como escolher a decoração perfeita',
+        blog3Excerpt: 'Guia prático para planejar uma decoração que reflicta a personalidade dos futuros pais e crie uma atmosfera mágica.',
+        blogReadMore: 'Ler mais →', prev: '← Anterior', next: 'Próximo →',
+        blog1Full: ['Escolher o tema certo é o primeiro passo. Pensa no que encanta o aniversário: os seus personagens favoritos, uma cor que adora, ou uma ideia que combine com a decoração da festa. Os temas mais populares este ano incluem natureza, animais e mundos de fantasia.', 'A chave está nos pequenos detalhes: guardanapos personalizados, confeti temático, etiquetas nos doces com o nome da criança. Tudo soma para criar uma atmosfera mágica sem precisar gastar uma fortuna.', 'E lembra-te: cada mesa é única. Não tentes copiar exatamente o que vês na internet, mas adapta as ideias ao gosto do aniversariante e ao espaço onde vais celebrar. É isso que faz especial cada trabalho.'],
+        blog2Full: ['Em 2026, os cas apostam na naturalidade. Os tons areia, verde sálvia e rosa empoeirado são os favoritos. Os brancos puros e as cores vibrantes dão lugar a uma paleta suave e elegante.', 'Os materiais naturais ganham protagonismo: madeira, linho, cerâmica artesanal. As mesas doces são decoradas com flores secas, ramos de oliveira e velas de cera virgem. Tudo transmite calor e autenticidade.', 'Outra tendência forte é a personalização: cada casamento tem a sua própria história, e a mesa doce deve contá-la. Desde monogramas nos bolos até cores que refletem a paleta escolhida para o casamento inteiro.'],
+        blog3Full: ['O baby shower é uma das celebrações mais emotivas. Por isso, a decoração deve ser quente e pessoal. O primeiro passo é falar com os futuros pais: que cores gostam? Têm algum tema em mente? Preferem algo minimalista ou abundante?', 'A mesa doce é o coração da festa. Combina doces com a paleta escolhida: macarons, cake pops, bolos decorados, mini tartelets. Cada peça pode levar detalhes que façam referência ao bebé ou ao tema da celebração.', 'Não esqueças os detalhes práticos: etiquetas com os nomes, caixas para levar doces, e um livro de conselhos para os pais. Tudo soma para criar uma memória inesquecível.'],
+        contactBadge: 'Contato', contactTitle: 'Vamos conversar?',
+        contactIntro: 'Tem um evento em mente? Adoraria ouvir sua ideia e criar algo único para você.',
+        footer: 'Feito com carinho · Made By AnaLu',
+        nav: ['Portfólio', 'Sobre mim', 'Serviços', 'Blog', 'Contato']
+      }
+    };
+
+    let currentLang = 'es';
+
+    function switchLang(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+
+      document.querySelector('.hero-badge').textContent = t.heroBadge;
+      document.querySelector('.hero-brand').textContent = t.heroBrand;
+      document.querySelector('.hero-title').innerHTML = t.title;
+      document.querySelector('.hero-subtitle').textContent = t.subtitle;
+      document.querySelector('.btn-primary').textContent = t.cta;
+      document.querySelector('.btn-secondary').textContent = t.secondary;
+      document.querySelector('.portfolio-badge').textContent = t.portfolioBadge;
+      document.querySelectorAll('.section-header h2')[0].textContent = t.portfolioTitle;
+      document.querySelectorAll('.section-header p')[0].textContent = t.portfolioSub;
+      document.querySelector('.about-badge').textContent = t.aboutBadge;
+      document.querySelector('.about-text h3').textContent = t.aboutTitle;
+      document.querySelectorAll('.about-text p')[0].textContent = t.aboutP1;
+      document.querySelectorAll('.about-text p')[1].textContent = t.aboutP2;
+      document.querySelector('.services-badge').textContent = t.servicesBadge;
+      document.querySelectorAll('.section-header h2')[1].textContent = t.servicesTitle;
+
+      const svcs = document.querySelectorAll('.service-item h4');
+      svcs[0].textContent = t.svc1; svcs[1].textContent = t.svc2;
+      svcs[2].textContent = t.svc3; svcs[3].textContent = t.svc4;
+      svcs[4].textContent = t.svc5; svcs[5].textContent = t.svc6;
+      const svcDescs = document.querySelectorAll('.service-item p');
+      svcDescs[0].textContent = t.svc1d; svcDescs[1].textContent = t.svc2d;
+      svcDescs[2].textContent = t.svc3d; svcDescs[3].textContent = t.svc4d;
+      svcDescs[4].textContent = t.svc5d; svcDescs[5].textContent = t.svc6d;
+
+      document.querySelector('.blog-badge').textContent = t.blogBadge;
+      document.querySelectorAll('.section-header h2')[2].textContent = t.blogTitle;
+
+      const blogCards = document.querySelectorAll('.blog-card');
+      const blogDates = [t.blog1Date, t.blog2Date, t.blog3Date];
+      const blogTitles = [t.blog1Title, t.blog2Title, t.blog3Title];
+      const blogExcerpts = [t.blog1Excerpt, t.blog2Excerpt, t.blog3Excerpt];
+      blogCards.forEach((card, i) => {
+        card.querySelector('.blog-card-date').textContent = blogDates[i];
+        card.querySelector('.blog-card-title').textContent = blogTitles[i];
+        card.querySelector('.blog-card-excerpt').textContent = blogExcerpts[i];
+        card.querySelector('.blog-card-readmore').textContent = t.blogReadMore;
+      });
+
+      document.querySelector('.contact-badge').textContent = t.contactBadge;
+      document.querySelector('.contact-inner h2').textContent = t.contactTitle;
+      document.querySelector('.contact-intro').textContent = t.contactIntro;
+      document.querySelector('footer p').textContent = t.footer;
+
+      document.querySelectorAll('nav ul li a').forEach((a, i) => { if (t.nav[i]) a.textContent = t.nav[i]; });
+      document.querySelectorAll('.lang-switch button').forEach(btn => { btn.classList.toggle('active', btn.dataset.lang === lang); });
+
+      // Update blog modal nav buttons
+      document.querySelector('.blog-modal-prev').textContent = t.prev;
+      document.querySelector('.blog-modal-next').textContent = t.next;
+
+      // If blog modal is open, refresh content
+      if (blogModal.classList.contains('active')) openBlogModal(currentBlogIndex);
+    }
+
+    document.querySelectorAll('.lang-switch button').forEach(btn => {
+      btn.addEventListener('click', () => switchLang(btn.dataset.lang));
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth' }); });
+    });
+
+    // ── Gallery Lightbox ──
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = lightbox.querySelector('.lightbox-img');
+    const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+    let currentImageIndex = 0;
+    const images = [];
+
+    galleryItems.forEach((item, i) => {
+      const img = item.querySelector('img');
+      images.push({ src: img.src, alt: img.alt });
+      item.addEventListener('click', () => openLightbox(i));
+      item.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(i); } });
+    });
+
+    function openLightbox(index) {
+      currentImageIndex = index;
+      lightboxImg.src = images[index].src;
+      lightboxImg.alt = images[index].alt;
+      lightboxCounter.textContent = `${index + 1} / ${images.length}`;
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightbox.querySelector('.lightbox-close').focus();
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      galleryItems[currentImageIndex]?.focus();
+    }
+    function navigateLightbox(dir) {
+      currentImageIndex = (currentImageIndex + dir + images.length) % images.length;
+      lightboxImg.src = images[currentImageIndex].src;
+      lightboxImg.alt = images[currentImageIndex].alt;
+      lightboxCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+    }
+
+    lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+    lightbox.querySelector('.lightbox-prev').addEventListener('click', () => navigateLightbox(-1));
+    lightbox.querySelector('.lightbox-next').addEventListener('click', () => navigateLightbox(1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    // ── Blog Modal ──
+    const blogModal = document.querySelector('.blog-modal');
+    const blogModalImg = blogModal.querySelector('.blog-modal-img');
+    const blogModalDate = blogModal.querySelector('.blog-modal-date');
+    const blogModalTitle = blogModal.querySelector('.blog-modal-title');
+    const blogModalText = blogModal.querySelector('.blog-modal-text');
+    const blogModalDots = blogModal.querySelector('.blog-modal-dots');
+    const blogModalPrev = blogModal.querySelector('.blog-modal-prev');
+    const blogModalNext = blogModal.querySelector('.blog-modal-next');
+    let currentBlogIndex = 0;
+
+    const blogArticles = [
+      { img: 'assets/WhatsApp Image 2026-09-04 at 17.37.06 (2).jpeg', alt: 'Decoración de mesa dulce infantil', dateKey: 'blog1Date', titleKey: 'blog1Title', fullKey: 'blog1Full' },
+      { img: 'assets/WhatsApp Image 2026-09-04 at 17.37.06 (5).jpeg', alt: 'Mesa dulce de boda', dateKey: 'blog2Date', titleKey: 'blog2Title', fullKey: 'blog2Full' },
+      { img: 'assets/WhatsApp Image 2026-09-04 at 17.37.06 (7).jpeg', alt: 'Decoración de baby shower', dateKey: 'blog3Date', titleKey: 'blog3Title', fullKey: 'blog3Full' }
+    ];
+
+    // Build dots
+    blogArticles.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => openBlogModal(i));
+      blogModalDots.appendChild(dot);
+    });
+
+    function openBlogModal(index) {
+      currentBlogIndex = index;
+      const t = translations[currentLang];
+      const article = blogArticles[index];
+      blogModalImg.src = article.img;
+      blogModalImg.alt = article.alt;
+      blogModalDate.textContent = t[article.dateKey];
+      blogModalTitle.textContent = t[article.titleKey];
+      blogModalText.innerHTML = t[article.fullKey].map(p => '<p>' + p + '</p>').join('');
+
+      // Update dots
+      blogModalDots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+
+      // Update nav buttons
+      blogModalPrev.disabled = index === 0;
+      blogModalNext.disabled = index === blogArticles.length - 1;
+
+      blogModal.classList.add('active');
+      blogModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      blogModal.querySelector('.blog-modal-close').focus();
+    }
+
+    function closeBlogModal() {
+      blogModal.classList.remove('active');
+      blogModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      document.querySelectorAll('.blog-card')[currentBlogIndex]?.focus();
+    }
+
+    document.querySelectorAll('.blog-card').forEach(card => {
+      card.addEventListener('click', () => openBlogModal(parseInt(card.dataset.blog)));
+    });
+
+    blogModal.querySelector('.blog-modal-close').addEventListener('click', closeBlogModal);
+    blogModal.addEventListener('click', e => { if (e.target === blogModal) closeBlogModal(); });
+    blogModalPrev.addEventListener('click', () => { if (currentBlogIndex > 0) openBlogModal(currentBlogIndex - 1); });
+    blogModalNext.addEventListener('click', () => { if (currentBlogIndex < blogArticles.length - 1) openBlogModal(currentBlogIndex + 1); });
+
+    document.addEventListener('keydown', e => {
+      if (!blogModal.classList.contains('active')) return;
+      if (e.key === 'Escape') closeBlogModal();
+      if (e.key === 'ArrowLeft' && currentBlogIndex > 0) openBlogModal(currentBlogIndex - 1);
+      if (e.key === 'ArrowRight' && currentBlogIndex < blogArticles.length - 1) openBlogModal(currentBlogIndex + 1);
+    });
+  </script>
+</body>
+</html>
